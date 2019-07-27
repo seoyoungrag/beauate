@@ -10,7 +10,7 @@
 
     <modules>
         <module>beauate-core</module>
-        <!-- <module>beauate-admin</module> -->
+        <module>beauate-ceo</module>
     </modules>
 
 </project>

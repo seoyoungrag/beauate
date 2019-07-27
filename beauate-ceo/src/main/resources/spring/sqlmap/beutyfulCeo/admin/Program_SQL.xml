@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beuty.ceo.admin.program.service.ProgramDao">
+	<sql id="pgmGubunSql">
+		<where>
+			<if test="pgmGubun != null or  pgmGubun !='' and pgmGubun == 'Y'">
+		       AND NOT EXISTS
+		              (SELECT C.prgr_id
+		                 FROM MENU_MNG C
+		                WHERE B.prgr_id = C.prgr_id)	
+			</if>
+			<if test="searchKeyword != null and searchKeyword != ''">
+				<choose>
+					<when test="searchCondition == 'prgr_nm'">
+						AND B.prgr_nm LIKE CONCAT('%', #{searchKeyword}, '%')
+					</when>
+					<when test="searchCondition == 'prgr_vriabl'">
+						AND B.prgr_vriabl LIKE CONCAT('%', #{searchKeyword}, '%')
+					</when>
+				</choose>
+			</if>
+		</where>
+	</sql>
+	
+	<!-- 
+	쿼리명 : 프로그램 리스트
+	  설명 : 프로그램 리스트
+	수정일      		수정자  	수정내용
+	==========  ======  ===================
+	2019. 7.21	신호석		최초 생성
+	작성자 : 신호석
+	최초작성일 : 2019. 7.21
+	-->
+	<select id="selectProgramList" parameterType="programVO" resultType="programVO">
+		SELECT
+		    prgr_id,
+		    prgr_nm,
+		    prgr_url,
+		    prgr_cn,
+		    prgr_vriabl,
+		    reg_id,
+		    reg_de,
+		    updt_id,
+		    updt_de
+		FROM
+		    prgr_mng B
+		<include refid="pgmGubunSql"/>
+		<choose>
+			<when test="sortSubject == 'prgr_id'">
+			ORDER BY B.prgr_id
+			</when>
+			<when test="sortSubject == 'prgr_nm'">
+			ORDER BY B.prgr_nm
+			</when>
+			<when test="sortSubject == 'prgr_vriabl'">
+			ORDER BY B.prgr_vriabl
+			</when>
+			<otherwise>
+			ORDER BY B.reg_de
+			</otherwise>
+		</choose>
+		limit #{firstIndex}, #{lastIndex}
+	</select>
+	
+	<!-- 
+	쿼리명 : 프로그램 리스트 카운트
+	  설명 : 프로그램 리스트 카운트
+	수정일     		 수정자 	 수정내용
+	==========  ======  ===================
+	2019. 7.21	신호석		최초 생성
+	작성자 : 신호석
+	최초작성일 : 2019. 7.21
+	-->
+	<select id="selectProgramListCnt" parameterType="programVO" resultType="int">
+		<![CDATA[
+		SELECT COUNT (*) CNT FROM prgr_mng B
+		]]>
+		<include refid="pgmGubunSql"/>	
+	</select>
+	
+	<!-- 
+	쿼리명 : 프로그램 변수 중복 검사
+	  설명 : 프로그램 변수는 중복 되면 안됨
+	수정일      		수정자  	수정내용
+	==========  ======  ===================
+	2019. 7.21	신호석  	최초 생성
+	작성자 : 신호석
+	최초작성일 : 2019. 7.21
+	-->	
+	<select id="selectProgramParamChk" parameterType="programVO" resultType="int">
+		<![CDATA[
+		SELECT
+		    COUNT(*) CNT
+		FROM
+		    prgr_mng
+		WHERE
+		        UPPER(prgr_vriabl) = UPPER(TRIM(#{prgr_vriabl, jdbcType=VARCHAR}))
+		]]>
+		<if test="prgr_id != '' and prgr_id != null">
+			AND prgr_id != #{prgr_id}
+		</if>
+	</select>
+	
+	<!-- 
+	쿼리명 : 프로그램 등록
+	  설명 : 프로그램 등록
+	수정일      		수정자  	수정내용
+	==========  ======  ===================
+	2019. 7.21	신호석 		최초 생성
+	작성자 : 신호석
+	최초작성일 : 2019. 7.21
+	-->	
+	<insert id="insertProgramProc" parameterType="programVO">
+		<![CDATA[
+		INSERT INTO prgr_mng 
+				   (prgr_nm,
+		            prgr_url,
+		            prgr_cn,
+		            prgr_vriabl,
+		            reg_id,
+		            reg_de)
+		VALUES	(TRIM(#{prgr_nm, jdbcType=VARCHAR}), 
+		         TRIM(#{prgr_url}), 
+		         #{prgr_cn, jdbcType=VARCHAR}, 
+		         TRIM(#{prgr_vriabl, jdbcType=VARCHAR}),
+		         #{login_id, jdbcType=VARCHAR}, 
+		         now());
+		]]>
+	</insert>
+	
+	<!-- 
+	쿼리명 : 프로그램 상세 조회
+	  설명 : 프로그램 상세 조회
+	수정일      		수정자  	수정내용
+	==========  ======  ===================
+	2019. 7.21 	 신호석 	 최초 생성
+	작성자 : 신호석
+	최초작성일 : 2019. 7.21
+	-->	
+	<select id="selectProgramDetail" parameterType="programVO" resultType="programVO">
+		<![CDATA[
+		SELECT prgr_id,
+			   prgr_nm,
+			   prgr_url,
+			   prgr_cn,
+			   prgr_vriabl,
+			   reg_id,
+			   reg_de,
+			   updt_id,
+			   updt_de
+		  FROM prgr_mng
+		 WHERE prgr_id = #{prgr_id, jdbcType=VARCHAR}
+		]]>
+	</select>
+	
+	<!-- 
+	쿼리명 : 프로그램 수정
+	  설명 : 프로그램 수정
+	수정일      		수정자  	수정내용
+	==========  ======  ===================
+	2019. 7.21	신호석		최초 생성
+	작성자 : 신호석
+	최초작성일 : 2019. 7.21
+	-->	
+	<update id="updateProgramProc" parameterType="programVO">
+		<![CDATA[
+		UPDATE prgr_mng
+		   SET prgr_nm = #{prgr_nm, jdbcType=VARCHAR},
+		       prgr_url = TRIM(#{prgr_url}),
+		       prgr_cn = #{prgr_cn, jdbcType=VARCHAR},
+		       prgr_vriabl = TRIM(#{prgr_vriabl, jdbcType=VARCHAR}),
+		       UPDT_ID = #{login_id, jdbcType=VARCHAR},
+		       UPDT_DE = now()
+		 WHERE prgr_id = #{prgr_id, jdbcType=VARCHAR}
+		]]>
+	</update>
+	
+	<!-- 
+	쿼리명 : 프로그램 삭제
+	  설명 : 프로그램 삭제
+	수정일      		수정자  	수정내용
+	==========  ======  ===================
+	2019. 7.21	신호석		최초 생성
+	작성자 : 신호석
+	최초작성일 : 2019. 7.21
+	-->	
+	<delete id="deleteProgramProc" parameterType="programVO">
+		<![CDATA[
+		DELETE FROM prgr_mng WHERE prgr_id = #{prgr_id, jdbcType=VARCHAR}
+		]]>
+	</delete>
+</mapper>

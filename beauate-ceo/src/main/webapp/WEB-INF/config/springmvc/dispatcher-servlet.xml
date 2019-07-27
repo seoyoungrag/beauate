@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- (@Repository, @Service, @Controller 와 같은 어노테이션(Annotation) 을 통해 Bean 객체를 생성) 태그를 설정파일에 추가하면 해당 어노테이션이 적용된 클래스를 빈으로 등록하게 된다.
+		스캔 대상 클래스 범위 지정은
+		<context:include-filter> 태그와
+		<context:exclude-filter> 태그를 사용하면 자동 스캔 대상에 포함시킬 클래스와 포함시키지 않을 클래스를 구체적으로 명시할 수 있다.
+		<context:include-filter> : 포함
+		<context:exclude-filter> : 포함하지 않음. -->
+	<context:component-scan base-package="com.beuty.ceo">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository" />
+	</context:component-scan>
+	
+	<!-- 사용자에게 보여줄 view를 생성할때 prefix 와 suffix 로 지정해 줄수 있다. -->
+	<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver" p:order="1"
+		p:viewClass="org.springframework.web.servlet.view.JstlView"
+		p:prefix="/WEB-INF/jsp/bfceo" p:suffix=".jsp" />
+	
+	<!-- jsonView -->
+	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
+	<bean id="bnViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="0"/>
+
+</beans>
