@@ -128,5 +128,5 @@ public interface ProgramService {
 	 * @return void
 	 * @throws Exception
 	 */
-	public void deleteProgramProc(ProgramVO programVO) throws Exception;
+	public void deleteProgramProc(ProgramVO programVO) throws Exception; 
 }
