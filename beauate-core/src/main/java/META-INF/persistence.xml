@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="beauate-core">
+		<class>com.beauate.core.entity.Atchfl</class>
+		<class>com.beauate.core.entity.AtchflDtl</class>
+		<class>com.beauate.core.entity.AtchflDtlPK</class>
+		<class>com.beauate.core.entity.AthrMng</class>
+		<class>com.beauate.core.entity.BeutyUser</class>
+		<class>com.beauate.core.entity.CnntLog</class>
+		<class>com.beauate.core.entity.CnntLogPK</class>
+		<class>com.beauate.core.entity.MenuMng</class>
+		<class>com.beauate.core.entity.MenuStat</class>
+		<class>com.beauate.core.entity.MenuStatPK</class>
+		<class>com.beauate.core.entity.PrgrMng</class>
+	</persistence-unit>
+</persistence>
