@@ -1,5 +1,44 @@
-spring:  profiles:    active: local
+spring:
+  profiles:
+    active: local
  
 # local
----logback:  access:    enabled: truelogging: level:    org.hibernate.type.descriptor.sql: trace
-spring:  mvc:    view:      prefix: /WEB-INF/jsp/bfceo/      suffix: .jsp  profiles: local  datasource:    driver-class-name: org.mariadb.jdbc.Driver    url: jdbc:mariadb://58.143.16.231:3306/beuty_db?useSSL=false&serverTimezone=Asia/Seoul    username: beuty_admin    password: sjdznf    initialization-mode: always  data:    rest:      base-path: /api  jpa:    show-sql: true    properties:      hibernate.format_sql: true      use_sql_comments: true  jackson:    default-property-inclusion: NON_ABSENTmanagement: endpoints:    web:      exposure:        include:          - '*'        ---  spring.profiles: prodspring.profiles.include: real-db
+---
+logback:
+  access:
+    enabled: true
+logging:
+ level:
+    org.hibernate.type.descriptor.sql: trace
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/bfceo/
+      suffix: .jsp
+  profiles: local
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://58.143.16.231:3306/beuty_db?useSSL=false&serverTimezone=Asia/Seoul
+    username: beuty_admin
+    password: sjdznf
+    initialization-mode: always
+  data:
+    rest:
+      base-path: /api
+  jpa:
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+      use_sql_comments: true
+  jackson:
+    default-property-inclusion: NON_ABSENT
+management:
+ endpoints:
+    web:
+      exposure:
+        include: 
+         - '*'
+        
+---  
+spring.profiles: prod
+spring.profiles.include: real-db

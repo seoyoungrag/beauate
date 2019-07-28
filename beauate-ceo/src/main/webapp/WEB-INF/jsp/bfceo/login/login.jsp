@@ -16,7 +16,7 @@
 <script type="text/javascript" src="${scriptPath}/jquery/jquery-1.12.3.min.js"></script>
 </head>
 <body class="backcolor">
-<%-- 	<form:form commandName="loginVO" id="loginForm" name="loginForm" method="post" action="${basePath}/login/a/n/afterLogin.do" > --%>
+ 	<form:form modelAttribute="beutyUser" id="loginForm" name="loginForm" method="post" action="${basePath}/login/a/n/afterLogin.do" > 
 		<div class="login_wrap">
 			<div class="loginBox">
 				<h2>
@@ -27,20 +27,20 @@
 				</p>
 				<dl class="box_area">
 					<dt>
-						<a href="#"><img src="${imagePath }/btn_login.jpg" width="97" height="78" /></a>
+						<a href="#"><img src="${imagePath }/btn_login.jpg" width="97" height="78" onclick="javascript:fn_login();"/></a>
 					</dt>
 					<dd class="namebox">ID</dd>
 					<dd class="boxin">
-						<input name="user_id" id="user_id" type="text" />
+						<input name="emailAddr" id="user_id" type="text" />
 					</dd>
 					<dd class="namebox">PASSWORD</dd>
 					<dd class="boxin">
-						<input name="user_pw" id="user_pw" type="text" onkeypress="if( event.keyCode==13 ){fn_login();}" autocomplete="false"/>
+						<input name="userPw" id="user_pw" type="password" onkeypress="if( event.keyCode==13 ){fn_login();}" autocomplete="false"/>
 					</dd>
 				</dl>
 			</div>
 		</div>
-<%-- 	</form:form> --%>
+ 	</form:form> 
 <script type="text/javascript">
 fn_login = function() {
 	//로그인 아이디가 있으면 로그인 아이디에 세팅 

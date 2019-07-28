@@ -1,19 +1,21 @@
 package com.beauate.ceo.login.web;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.HttpServletBean;
 
-import com.beauate.ceo.login.service.LoginVO;
+import com.beauate.core.entity.BeutyUser;
+import com.beauate.core.repository.BeutyUserRepository;
 
 @Controller
 public class LoginController {
+	
+	@Autowired
+	BeutyUserRepository beutyUserRepository;
 
 	/**
 	 * <pre>
@@ -35,7 +37,7 @@ public class LoginController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/login/a/n/login.do")
-	public String login() throws Exception {
+	public String login(@ModelAttribute BeutyUser beutyUser) throws Exception {
 		return "/login/login";
 	}
 	
@@ -59,7 +61,9 @@ public class LoginController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/login/a/n/afterLogin.do")
-	public String afterLogin(HttpServletRequest request, HttpServletResponse response, SessionStatus status, String user_id, @ModelAttribute("loginVO") LoginVO loginVO, ModelMap model) {
+	public String afterLogin(SessionStatus status, @ModelAttribute BeutyUser beutyUser) {
+		Optional<BeutyUser> result = beutyUserRepository.findByEmailAddrAndUserPw(beutyUser.getEmailAddr(), beutyUser.getUserPw());
+		result.isPresent();
 		return null;
 	}
 }

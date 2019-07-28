@@ -52,7 +52,7 @@ public class UserManageServiceImple implements UserManageService {
 	 */
 	public void selectUserList(UserVO userVO, ModelMap model) throws Exception {
 		Pageable pageable = PageRequest.of(1, 10);
-		Page<PrgrMng> selectList = null;
+		Page<BeutyUser> selectList = null;
 		if(userVO.getSearchKeyword()!=null && userVO.getSearchCondition()!=null) {
 			if(userVO.getDel_yn()!=null&&!userVO.getDel_yn().equals("")) {
 				if(userVO.getSearchCondition().equals("user_nm")) {
