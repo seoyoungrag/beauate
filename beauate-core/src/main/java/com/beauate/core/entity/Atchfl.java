@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 
-/**
+/** git testqqq
  * The persistent class for the ATCHFL database table.
  * 
  */
