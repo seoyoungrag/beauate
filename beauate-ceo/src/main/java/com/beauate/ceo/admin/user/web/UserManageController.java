@@ -219,11 +219,11 @@ public class UserManageController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/usermgr/z/n/updateUserProc.do")
-	public String userUpdateProc(@ModelAttribute("userVO") UserVO userVO, SessionStatus status, ModelMap model) throws Exception {
+	public String userUpdateProc(@ModelAttribute("userVO") BeutyUser userVO, SessionStatus status, ModelMap model) throws Exception {
 		userManageService.updateUserProc(userVO);
 		// 중복 submit 방지
 		status.setComplete();
-		return "redirect:/usermgr/z/m/selectUserDetail.do?user_id="+userVO.getUser_id();
+		return "redirect:/usermgr/z/m/selectUserDetail.do?userId="+userVO.getUserId();
 	}
 	
 	/**
@@ -247,7 +247,7 @@ public class UserManageController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/usermgr/z/n/deleteUserProc.do")
-	public String deleteUserProc(@ModelAttribute("userVO") UserVO userVO, SessionStatus status, ModelMap model) throws Exception {
+	public String deleteUserProc(@ModelAttribute("userVO") BeutyUser userVO, SessionStatus status, ModelMap model) throws Exception {
 		userManageService.deleteUserProc(userVO);
 		status.setComplete();
 		return "redirect:/usermgr/z/m/selectUserList.do";

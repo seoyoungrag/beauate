@@ -32,14 +32,14 @@
 					<img src="${imagePath }/ico_home.png" width="10" height="9" />&nbsp;〉&nbsp;포탈관리&nbsp;〉&nbsp;프로그램관리
 				</p>
 				<form:form modelAttribute="programVO" id="listForm" name="listForm" method="post" action="${basePath}/program/z/m/selectProgramList.do">
-					<form:hidden path="prgr_id"/>
+					<form:hidden path="prgrId"/>
 					<form:hidden path="sortSubject"/>
 					<form:hidden path="sortDescend"/>
 					<form:hidden path="pageIndex"/>
 					<div class="selectBox">
 						<form:select path="searchCondition" class="w13p">
-							<form:option value="prgr_nm" label="프로그램명"></form:option>
-							<form:option value="prgr_vriabl" label="변수명"></form:option>
+							<form:option value="prgrNm" label="프로그램명"></form:option>
+							<form:option value="prgrVriabl" label="변수명"></form:option>
 						</form:select>
 						<form:input path="searchKeyword" onkeydown="if(event.keyCode==13){javascript:fn_searchList(1);}" class="searchName" style="width: 733px;"></form:input>
 						<button type="button" class="grayBtn ico" onclick="javascript:fn_searchList(1);"><img src="${imagePath }/ico_search.png"> 검색</button>
@@ -55,15 +55,15 @@
 							<col width="46%">
 						</colgroup>
 						<thead>
-							<th sortId="prgr_id" class="noBg">프로그램_일련번호
+							<th sortId="prgrId" class="noBg">프로그램_일련번호
 								<span class="arrow_descending"><a  onclick="javascript:fn_sort(this.parentNode);"></a></span>
 								<span class="arrow_ascending"><a  onclick="javascript:fn_sort(this.parentNode);"></a></span>
 							</th>
-							<th sortId="prgr_nm">프로그램명
+							<th sortId="prgrNm">프로그램명
 								<span class="arrow_descending"><a  onclick="javascript:fn_sort(this.parentNode);"></a></span>
 								<span class="arrow_ascending"><a  onclick="javascript:fn_sort(this.parentNode);"></a></span>				
 							</th>
-							<th sortId="prgr_vriabl">변수명
+							<th sortId="prgrVriabl">변수명
 								<span class="arrow_descending"><a  onclick="javascript:fn_sort(this.parentNode);"></a></span>
 								<span class="arrow_ascending"><a  onclick="javascript:fn_sort(this.parentNode);"></a></span>		
 							</th>
@@ -73,23 +73,23 @@
 							<c:choose>
 								<c:when test="${fn:length(programList) != 0}">
 									<c:forEach items="${programList}" var="list" varStatus="i">
-										<tr class="row" style="cursor: pointer;" onclick="fn_programDetail('${list.prgr_id}');">
-											<td title="<c:out value='${list.prgr_id}'/>">
-												<c:out value="${list.prgr_id}"/>
+										<tr class="row" style="cursor: pointer;" onclick="fn_programDetail('${list.prgrId}');">
+											<td title="<c:out value='${list.prgrId}'/>">
+												<c:out value="${list.prgrId}"/>
 											</td>
 											<td>
-												<div title='<c:out value="${list.prgr_nm }"/>'>
-													<c:out value="${list.prgr_nm}"></c:out>
+												<div title='<c:out value="${list.prgrNm }"/>'>
+													<c:out value="${list.prgrNm}"></c:out>
 												</div>
 											</td>
 											<td>
-												<div title='<c:out value="${list.prgr_vriabl }"/>'>
-													<c:out value="${list.prgr_vriabl}"></c:out>
+												<div title='<c:out value="${list.prgrVriabl }"/>'>
+													<c:out value="${list.prgrVriabl}"></c:out>
 												</div>
 											</td>
 											<td style="text-align: left;">
-												<div title='<c:out value="${list.prgr_url }"/>'>
-													<c:out value="${list.prgr_url}"></c:out>
+												<div title='<c:out value="${list.prgrUrl }"/>'>
+													<c:out value="${list.prgrUrl}"></c:out>
 												</div>
 											</td>
 										</tr>
@@ -131,9 +131,9 @@
 	};
 
 	//프로그램 상세정보
-	var fn_programDetail = function(prgr_id) {
+	var fn_programDetail = function(prgrId) {
 		var frm = document.listForm;
-		frm.prgr_id.value = prgr_id;
+		frm.prgrId.value = prgrId;
 		frm.action = "<c:url value='${basePath}/program/z/m/selectProgramDetail.do'/>";
 		frm.submit();
 	};

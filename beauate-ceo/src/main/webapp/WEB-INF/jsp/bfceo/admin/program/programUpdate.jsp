@@ -33,7 +33,7 @@
 					<img src="${imagePath }/ico_home.png" width="10" height="9" />&nbsp;〉&nbsp;포탈관리&nbsp;〉&nbsp;프로그램관리
 				</p>
 				<form:form modelAttribute="resultVO" name="resultVO" id="resultVO" method="post" action="${basePath}/program/z/n/updateProgramProc.do">
-					<input type="hidden" name="prgr_id" value="<c:out value='${programVO.prgr_id}'/>"></input>
+					<input type="hidden" name="prgrId" value="<c:out value='${programVO.prgrId}'/>"></input>
 					<h4 class="contentTitle_h4">프로그램 수정</h4>
 					<div class="tableLayer">
 						<table class="table">
@@ -50,16 +50,16 @@
 									<td>
 										<div class="commonSearch_wrap">
 											<label class="blind" for=" ">d</label>
-											<form:input path="prgr_nm" style="width: 240px;" type="text" onfocus="checker(this, 30 , 'nbytes_prgr_nm');" onblur="stopchecker();"/>
-											&nbsp;[<span id="nbytes_prgr_nm" class="color_red">0</span>/30]byte
+											<form:input path="prgrNm" style="width: 240px;" type="text" onfocus="checker(this, 30 , 'nbytes_prgrNm');" onblur="stopchecker();"/>
+											&nbsp;[<span id="nbytes_prgrNm" class="color_red">0</span>/30]byte
 										</div>
 									</td>
 									<th class="bullet_orange">변수명</th>
 									<td>
 										<div class="commonSearch_wrap">
 											<label class="blind" for=" ">d</label>
-											<form:input path="prgr_vriabl" style="width: 240px;" type="text" onfocus="checker(this, 20 , 'nbytes_prgr_vriabl');" onblur="stopchecker();"/>
-											&nbsp;[<span id="nbytes_prgr_vriabl" class="color_red">0</span>/20]byte
+											<form:input path="prgrVriabl" style="width: 240px;" type="text" onfocus="checker(this, 20 , 'nbytes_prgrVriabl');" onblur="stopchecker();"/>
+											&nbsp;[<span id="nbytes_prgrVriabl" class="color_red">0</span>/20]byte
 										</div>
 									</td>
 								</tr>
@@ -68,16 +68,16 @@
 									<td colspan="4">
 										<div class="commonSearch_wrap">
 											<label class="blind" for=" ">d</label>
-											<form:input path="prgr_url" style="width: 730px;" type="text" onfocus="checker(this, 50 , 'nbytes_prgr_url');" onblur="stopchecker();"/>
-											&nbsp;[<span id="nbytes_prgr_url" class="color_red">0</span>/50]byte
+											<form:input path="prgrUrl" style="width: 730px;" type="text" onfocus="checker(this, 50 , 'nbytes_prgrUrl');" onblur="stopchecker();"/>
+											&nbsp;[<span id="nbytes_prgrUrl" class="color_red">0</span>/50]byte
 										</div>
 									</td>
 								</tr>
 								<tr>
 									<th>설명</th>
 									<td colspan="4" class="pdtb3"> <!-- textarea 의 경우는 td에  class="pdtb3" 패딩 클래스 추가 -->
-										<form:textarea path="prgr_cn" rows="5" onfocus="checker(this, 200 , 'nbytes_prgr_cn');" onblur="stopchecker();"/><br/>
-										&nbsp;[<span id="nbytes_prgr_cn" class="color_red">0</span>/200]byte
+										<form:textarea path="prgrCn" rows="5" onfocus="checker(this, 200 , 'nbytes_prgrCn');" onblur="stopchecker();"/><br/>
+										&nbsp;[<span id="nbytes_prgrCn" class="color_red">0</span>/200]byte
 									</td>
 								</tr>
 							</tbody>
@@ -101,39 +101,39 @@
 	<script type="text/javascript">
 	//수정
 	var fn_updateProgramProc = function(){
-		if (!TypeChecker.required($("#prgr_nm").val())) {
+		if (!TypeChecker.required($("#prgrNm").val())) {
 			alert("'프로그램명'은  "+ TypeChecker.requiredText);
-			$("#prgr_nm").focus();
+			$("#prgrNm").focus();
 			return;
 		}
 		
-		if (!TypeChecker.required($("#prgr_vriabl").val())) {
+		if (!TypeChecker.required($("#prgrVriabl").val())) {
 			alert("'프로그램 변수명'은  "+ TypeChecker.requiredText);
-			$("#prgr_vriabl").focus();
+			$("#prgrVriabl").focus();
 			return;
 		}
 		
- 		if (!TypeChecker.alphanum($("#prgr_vriabl").val())) {
+ 		if (!TypeChecker.alphanum($("#prgrVriabl").val())) {
 			alert("'프로그램 변수명'은 "+TypeChecker.alphanumText);
-			$("#prgr_vriabl").focus();
+			$("#prgrVriabl").focus();
 			return;
 		}
  		
- 		if (!TypeChecker.required($("#prgr_url").val())) {
+ 		if (!TypeChecker.required($("#prgrUrl").val())) {
 			alert("'프로그램 대표 URL'은  "+ TypeChecker.requiredText);
-			$("#prgr_url").focus();
+			$("#prgrUrl").focus();
 			return;
 		}
 
- 		if (!TypeChecker.programUrl($("#prgr_url").val())) {
+ 		if (!TypeChecker.programUrl($("#prgrUrl").val())) {
 			alert("'프로그램 대표 URL'은  "+ TypeChecker.programUrlText);
-			$("#prgr_url").focus();
+			$("#prgrUrl").focus();
 			return;
 		}
 
-		if ($("#prgr_url").val().indexOf('/' + $("#prgr_vriabl").val().trim() + '/') == '-1') {
+		if ($("#prgrUrl").val().indexOf('/' + $("#prgrVriabl").val().trim() + '/') == '-1') {
 			alert("'프로그램 URL'은 '프로그램변수명'를 맨앞에 포함된 형태가 되어야합니다.");
-			$("#prgr_url").focus();
+			$("#prgrUrl").focus();
 			return;
 		}
 		
@@ -154,7 +154,7 @@
 				
 				if(r.chkResult == 'N') {
 					alert("프로그램 변수명이 중복되었습니다 다른값으로 입력바랍니다.");
-					$("#prgr_vriabl").focus();
+					$("#prgrVriabl").focus();
 					return;
 					} else {
 					document.resultVO.submit();

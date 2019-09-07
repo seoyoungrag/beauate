@@ -110,7 +110,7 @@ public interface UserManageService {
 	 * @return
 	 * @throws Exception
 	 */ 
-	public void updateUserProc(UserVO userVO) throws Exception;
+	public void updateUserProc(BeutyUser userVO) throws Exception;
 	
 	/**
 	 * <pre>
@@ -131,5 +131,5 @@ public interface UserManageService {
 	 * @return
 	 * @throws Exception
 	 */ 
-	public void deleteUserProc(UserVO userVO) throws Exception;
+	public void deleteUserProc(BeutyUser userVO) throws Exception;
 }

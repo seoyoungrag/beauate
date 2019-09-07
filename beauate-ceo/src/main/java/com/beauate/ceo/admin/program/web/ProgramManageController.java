@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 
-import com.beauate.ceo.admin.program.service.ProgramService;
-import com.beauate.ceo.admin.program.service.ProgramVO;
+import com.beauate.ceo.admin.program.service.ProgramManageService;
 import com.beauate.ceo.login.service.LoginVO;
+import com.beauate.core.entity.PrgrMng;
 
 @Controller
-public class ProgramController {
+public class ProgramManageController {
 	protected Log log = LogFactory.getLog(this.getClass());
 
 	@Resource(name = "programService")
-	private ProgramService programService;
+	private ProgramManageService programService;
 	
 	/**
 	 * <pre>
@@ -42,7 +42,7 @@ public class ProgramController {
 	 * @throws Exception
 	 */ 	
 	@RequestMapping(value = "/program/z/m/selectProgramList.do")
-	public String selectProgramList(@ModelAttribute("programVO") ProgramVO programVO, ModelMap model) throws Exception {
+	public String selectProgramList(@ModelAttribute("programVO") PrgrMng programVO, ModelMap model) throws Exception {
 		programService.selectProgramList(programVO, model);
 		return "/admin/program/programList";
 	}
@@ -68,36 +68,8 @@ public class ProgramController {
 	 * @throws Exception
 	 */ 	
 	@RequestMapping(value = "/program/z/m/insertProgram.do")
-	public String insertProgram(@ModelAttribute("programVO") ProgramVO programVO, ModelMap model) throws Exception {
+	public String insertProgram(@ModelAttribute("programVO") PrgrMng programVO, ModelMap model) throws Exception {
 		return "/admin/program/programInsert";
-	}
-	
-	/**
-	 * <pre>
-	 * 1. 개요 : 프로그램 변수가 중복여부 검사
-	 * 2. 처리내용 : 프로그램 변수가 중복여부 검사
-	 * </pre>
-	 * @Method Name : pgmParamChk
-	 * @date : 2019. 07. 21.
-	 * @author : 신호석
-	 * @history : 
-	 *	-----------------------------------------------------------------------
-	 *	변경일					작성자				변경내용  
-	 *	----------- ------------------- ---------------------------------------
-	 *	2019. 07. 21.		신호석				최초 작성 
-	 *	-----------------------------------------------------------------------
-	 * 
-	 * @param programVO
-	 * @param model
-	 * @return String
-	 * @throws Exception
-	 */ 	
-	@RequestMapping(value = "/program/z/n/selectProgramParamChk.do")
-	public String selectProgramParamChk(@ModelAttribute("programVO") ProgramVO programVO, ModelMap model) throws Exception {
-		log.debug(">>> Before pgmParamChk : " + model);
-		programService.selectProgramParamChk(programVO, model);
-		log.debug(">>> Afer pgmParamChk : " + model);
-		return "jsonView";
 	}
 	
 	/**
@@ -123,7 +95,7 @@ public class ProgramController {
 	 * @throws Exception
 	 */ 	
 	@RequestMapping(value = "/program/z/n/insertProgramProc.do")
-	public String insertProgramProc(@ModelAttribute("programVO") ProgramVO programVO, ModelMap model, SessionStatus status, LoginVO sessionVO) throws Exception {
+	public String insertProgramProc(@ModelAttribute("programVO") PrgrMng programVO, ModelMap model, SessionStatus status, LoginVO sessionVO) throws Exception {
 		log.debug(">>> Befor insertProgramProc : " + model);
 
 		programVO.setLogin_id("mong");
@@ -158,7 +130,7 @@ public class ProgramController {
 	 * @throws Exception
 	 */ 	
 	@RequestMapping(value = "/program/z/m/selectProgramDetail.do")
-	public String selectProgramDetal(@ModelAttribute("programVO") ProgramVO programVO, ModelMap model) throws Exception {
+	public String selectProgramDetal(@ModelAttribute("programVO") PrgrMng programVO, ModelMap model) throws Exception {
 		log.debug(">>> before selectProgram : " + programVO);
 		programService.selectProgramDetail(programVO, model);
 		log.debug(">>> Afer selectProgram : " + model);
@@ -186,11 +158,8 @@ public class ProgramController {
 	 * @throws Exception
 	 */ 	
 	@RequestMapping(value = "/program/z/m/updateProgram.do")
-	public String updateProgram(@ModelAttribute("programVO") ProgramVO programVO, ModelMap model) throws Exception {
-		log.debug(">>> Before updateProgram, model : " + model);
+	public String updateProgram(@ModelAttribute("programVO") PrgrMng programVO, ModelMap model) throws Exception {
 		programService.selectProgramDetail(programVO, model);
-		log.debug(">>> After updateProgram, model : " + model);
-		
 		return "/admin/program/programUpdate";
 	}
 	
@@ -217,7 +186,7 @@ public class ProgramController {
 	 * @throws Exception
 	 */ 	
 	@RequestMapping(value = "/program/z/n/updateProgramProc.do")
-	public String updateProgramProc(@ModelAttribute("programVO") ProgramVO programVO, SessionStatus status, ModelMap model, LoginVO sessionVO) throws Exception {
+	public String updateProgramProc(@ModelAttribute("programVO") PrgrMng programVO, SessionStatus status, ModelMap model, LoginVO sessionVO) throws Exception {
 		log.debug(">>> Before updateProgramProc, model : " + model);
 		log.debug(">>> Before updateProgramProc, programVO : " + programVO);
 		
@@ -230,7 +199,7 @@ public class ProgramController {
 		log.debug(">>> After updateProgramProc, model : " + model);
 		log.debug(">>> After updateProgramProc, programVO : " + programVO);
 		
-		return "redirect:/program/z/m/selectProgramDetail.do?prgr_id=" + programVO.getPrgr_id();
+		return "redirect:/program/z/m/selectProgramDetail.do?prgrId=" + programVO.getPrgrId();
 	}
 	
 	/**
@@ -256,7 +225,7 @@ public class ProgramController {
 	 * @throws Exception
 	 */ 	
 	@RequestMapping(value = "/program/z/n/deleteProgramProc.do")
-	public String deleteProgramProc(@ModelAttribute("programVO") ProgramVO programVO, SessionStatus status, ModelMap model, LoginVO sessionVO) throws Exception {
+	public String deleteProgramProc(@ModelAttribute("programVO") PrgrMng programVO, SessionStatus status, ModelMap model, LoginVO sessionVO) throws Exception {
 		log.debug(">>> Before deleteProgramProc, model : " + model);
 		log.debug(">>> Before deleteProgramProc, programVO : " + programVO);
 

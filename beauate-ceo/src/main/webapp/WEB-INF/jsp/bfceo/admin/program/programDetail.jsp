@@ -44,17 +44,17 @@
 						<tbody class="line">
 							<tr>
 								<th class="bullet_orange">프로그램명</th>
-								<td><c:out value="${resultVO.prgr_nm}"/></td>
+								<td><c:out value="${resultVO.prgrNm}"/></td>
 								<th class="bullet_orange">변수명</th>
-								<td><c:out value="${resultVO.prgr_vriabl}"/></td>
+								<td><c:out value="${resultVO.prgrVriabl}"/></td>
 							</tr>
 							<tr>
 								<th class="bullet_orange">프로그램 대표 URL</th>
-								<td colspan="4"><c:out value="${resultVO.prgr_url}"/></td>
+								<td colspan="4"><c:out value="${resultVO.prgrUrl}"/></td>
 							</tr>
 							<tr>
 								<th>설명</th>
-								<td colspan="4"><c:out value="${resultVO.prgr_cn}"/></td>
+								<td colspan="4"><c:out value="${resultVO.prgrCn}"/></td>
 							</tr>
 						</tbody>
 					</table>
@@ -69,7 +69,7 @@
 		<!--container End-->
 	</div>
 	<form:form modelAttribute="programVO" id="detailForm" name="detailForm" method="post" >
-		<input type="hidden" name="prgr_id" id="prgr_id" value="${resultVO.prgr_id}">
+		<input type="hidden" name="prgrId" id="prgrId" value="${resultVO.prgrId}">
 	</form:form>
 	<!--wrap End-->
 	<div class="footer">

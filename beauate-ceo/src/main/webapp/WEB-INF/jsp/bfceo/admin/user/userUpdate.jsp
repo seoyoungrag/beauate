@@ -34,8 +34,8 @@
 				</p>
 				<h4 class="contentTitle_h4">로그인 정보</h4>
 				<form:form modelAttribute="userVO" name="userVO" id="userVO" method="post" action="${basePath}/usermgr/z/n/updateUserProc.do" onsubmit="return false;">
-					<form:hidden path="user_id" id="user_id"/>
-					<form:hidden path="email_addr" id="email_addr"/>
+					<form:hidden path="userId" id="userId"/>
+					<form:hidden path="emailAddr" id="emailAddr"/>
 					<div class="tableLayer">
 						<table class="table">
 							<caption></caption>
@@ -48,23 +48,23 @@
 							<tbody class="line">
 								<tr>
 									<th>사용자 일련번호</th>
-									<td><c:out value="${userVO.user_id}"/></td>
+									<td><c:out value="${userVO.userId}"/></td>
 									<th>E-mail</th>
-									<td><c:out value="${userVO.email_addr}"/></td>
+									<td><c:out value="${userVO.emailAddr}"/></td>
 								</tr>
 								<tr>
 									<th class="bullet_orange">이름</th>
 									<td>
 										<div class="commonSearch_wrap">
 											<label class="blind" for=" ">d</label>
-											<form:input path="user_nm" onfocus="checker(this, 100 , 'nbytes_usrNm');" onblur="stopchecker();" style="width: 320px;" type="text" placeholder="${userVO.user_nm}"/>
+											<form:input path="userNm" onfocus="checker(this, 100 , 'nbytes_usrNm');" onblur="stopchecker();" style="width: 320px;" type="text" placeholder="${userVO.userNm}"/>
 										</div>
 									</td>
 									<th class="bullet_orange">패스워드</th>
 									<td>
 										<div class="commonSearch_wrap">
 											<label class="blind" for=" ">d</label>
-											<form:password path="user_pw" id="user_pw" readonly="true" onfocus="checker(this, 20 , 'nbytes_usrPw');" onblur="stopchecker();" autocomplete="off" style="width: 180px;"/> &nbsp; 
+											<form:password path="userPw" id="userPw" readonly="true" onfocus="checker(this, 20 , 'nbytes_usrPw');" onblur="stopchecker();" autocomplete="off" style="width: 180px;"/> &nbsp; 
 											<label class="blind" for=""></label>
 											<input type="checkbox" value="" id="pwChange"></input> 체크시 패스워드 변경
 										</div>
@@ -73,11 +73,11 @@
 								</tr>
 								<tr>
 									<th class="bullet_orange">가입일</th>
-									<td><fmt:formatDate value="${userVO.join_dt}" pattern="yyyy-MM-dd"/></td>
+									<td><fmt:formatDate value="${userVO.joinDt}" pattern="yyyy-MM-dd"/></td>
 									<th>패스워드 확인</th>
 									<td>
 										<div class="commonSearch_wrap">
-											<input type="password" id="user_pw_confirm" readonly="true" onfocus="checker(this, 20 , 'nbytes_usrPw');" onblur="stopchecker();" autocomplete="off" style="width: 180px;"/> &nbsp; 
+											<input type="password" id="userPw_confirm" readonly="true" onfocus="checker(this, 20 , 'nbytes_usrPw');" onblur="stopchecker();" autocomplete="off" style="width: 180px;"/> &nbsp; 
 											<label class="blind" for=""></label>
 											<span id="pwd_check_false" style="color:red; display: none">패스워드가 다릅니다</span>
 											<span id="pwd_check_true" style="color:blue; display: none">패스워드가 일치합니다</span>
@@ -103,7 +103,7 @@
 									<td>
 										<div class="commonSearch_wrap">
 											<label class="blind" for=" ">d</label>
-											<form:input path="user_eng_nm" id="user_eng_nm" style="width: 320px;" onfocus="checker(this, 100 , 'nbytes_user_nm');" onblur="stopchecker();" />
+											<form:input path="userEngNm" id="userEngNm" style="width: 320px;" onfocus="checker(this, 100 , 'nbytes_userNm');" onblur="stopchecker();" />
 										</div>
 									</td>
 									<th>전화번호</th>
@@ -119,7 +119,7 @@
 									<td>
 										<div class="commonSearch_wrap">
 											<label class="blind" for=" ">d</label> 
-											<form:input path="zip_no" id="zip_no" style="width: 80px;" readonly="true" onfocus="this.blur();"/>
+											<form:input path="zipNo" id="zipNo" style="width: 80px;" readonly="true" onfocus="this.blur();"/>
 											<div class="T_btnLayer fr">
 												<a href="javascript:void(0);" onclick="fn_jusoPopup();"><button type="button" class="blueBtn L">주소찾기</button></a>
 											</div>
@@ -129,7 +129,7 @@
 									<td>
 										<div class="commonSearch_wrap">
 											<label class="blind" for=" ">d</label>
-											<form:input path="mbl_pno" id="mbl_pno" style="width: 320px;" onfocus="checker(this, 15 , 'nbytes_mbl_pno');" onblur="stopchecker();" />
+											<form:input path="mblPno" id="mblPno" style="width: 320px;" onfocus="checker(this, 15 , 'nbytes_mblPno');" onblur="stopchecker();" />
 										</div>
 									</td>
 								</tr>
@@ -145,7 +145,7 @@
 									<td>
 										<div class="commonSearch_wrap">
 											<label class="blind" for=" ">d</label>
-											<form:input path="fax_no" id="fax_no" style="width: 320px;" onfocus="checker(this, 15 , 'nbytes_fax_no');" onblur="stopchecker();" />
+											<form:input path="faxNo" id="faxNo" style="width: 320px;" onfocus="checker(this, 15 , 'nbytes_faxNo');" onblur="stopchecker();" />
 										</div>
 									</td>
 								</tr>
@@ -158,7 +158,7 @@
 										</div>
 									</td>
 									<th>수정일시</th>
-									<td><c:if test="${empty userVO.mod_dt}">-</c:if><fmt:formatDate value="${userVO.mod_dt}" pattern="yyyy-MM-dd"/></td>
+									<td><c:if test="${empty userVO.modDt}">-</c:if><fmt:formatDate value="${userVO.modDt}" pattern="yyyy-MM-dd"/></td>
 								</tr>
 							</tbody>
 						</table>
@@ -166,7 +166,7 @@
 				</form:form>
 				<div class="T_btnLayer fr">
 					<a href="javascript:void(0);" onclick="javascript:fn_updateUserProc();"><button type="button" class="blueBtn L">수정</button></a>
-					<a href="${basePath}/usermgr/z/m/selectUserDetail.do?user_id=${userVO.user_id}"><button type="button" class="blueBtn L">취소</button></a>
+					<a href="${basePath}/usermgr/z/m/selectUserDetail.do?userId=${userVO.userId}"><button type="button" class="blueBtn L">취소</button></a>
 				</div>
 			</div>
 		</div>
@@ -180,32 +180,32 @@
 	<script type="text/javascript">
 		//수정
 		var fn_updateUserProc = function(){
-			var user_pw = $("#userVO #user_pw").val();
-			var user_pw_confirm = $("#userVO #user_pw_confirm").val();
-			if(!$.trim($("#userVO #user_nm").val())) {
+			var userPw = $("#userVO #userPw").val();
+			var userPw_confirm = $("#userVO #userPw_confirm").val();
+			if(!$.trim($("#userVO #userNm").val())) {
 				alert("이름을 입력해 주세요");	
-				$("#userVO #user_nm").focus();
+				$("#userVO #userNm").focus();
 				return;
 			}
 			if($("#pwChange").is(':checked')){
 				$("#pwChangeGubun").val("Y");
-				if(!$.trim(user_pw)) {
+				if(!$.trim(userPw)) {
 					alert("패스워드 변경을 체크하셨습니다. \n패스워드를 입력해 주세요");	
-					$("#userVO #user_pw").focus();
+					$("#userVO #userPw").focus();
 					return;
 				}
-				if(!$.trim(user_pw_confirm)) {
+				if(!$.trim(userPw_confirm)) {
 					alert("패스워드 변경을 체크하셨습니다. \n패스워드 확인을 입력해 주세요");	
-					$("#userVO #user_pw_confirm").focus();
+					$("#userVO #userPw_confirm").focus();
 					return;
 				}
 				//비밀번호 9~20자의 영문, 특수문자 1자(%,$,#,@,!) 세가지 조합
-				if(!fn_checkPass("user_pw")) {
+				if(!fn_checkPass("userPw")) {
 					return;
 				}
-				if(user_pw != user_pw_confirm) {
+				if(userPw != userPw_confirm) {
 					alert("패스워드를 확인해주세요");
-					$("#userVO #user_pw").focus();
+					$("#userVO #userPw").focus();
 					return;
 				}
 			}else{
@@ -219,8 +219,8 @@
 			if (!confirm("수정 하시겠습니까?")) {
 				return;
 			}
-			$("#user_id").val('${userVO.user_id}');
-			$("#email_addr").val('${userVO.email_addr}');
+			$("#userId").val('${userVO.userId}');
+			$("#emailAddr").val('${userVO.emailAddr}');
 			document.userVO.submit();
 		};
 		
@@ -228,22 +228,22 @@
 		$(function() {
 			//패스워드 변경 클릭시
 			$("#pwChange").click(function() {
-				$("#user_pw").val("");
-				$("#user_pw_confirm").val("");
+				$("#userPw").val("");
+				$("#userPw_confirm").val("");
 				if ($("#pwChange").is(':checked')) {
-					$("#user_pw").attr('readonly', false);
-					$("#user_pw_confirm").attr('readonly', false);
+					$("#userPw").attr('readonly', false);
+					$("#userPw_confirm").attr('readonly', false);
 				} else {
-					$("#user_pw").attr('readonly', true);
-					$("#user_pw_confirm").attr('readonly', true);
+					$("#userPw").attr('readonly', true);
+					$("#userPw_confirm").attr('readonly', true);
 				}
 			});
 		});
 		
 		//패스워드 비교
-		$("#user_pw").keyup(function() {
-			var pwd1=$("#user_pw").val();
-			var pwd2=$("#user_pw_confirm").val();
+		$("#userPw").keyup(function() {
+			var pwd1=$("#userPw").val();
+			var pwd2=$("#userPw_confirm").val();
 			if(pwd1.length != 0 || pwd2.length != 0){
 				if(pwd1 == pwd2){
 					$("#pwd_check_false").css("display","none");
@@ -254,9 +254,9 @@
 				}	
 			}
 		});
-		$("#user_pw_confirm").keyup(function() {
-			var pwd1=$("#user_pw").val();
-			var pwd2=$("#user_pw_confirm").val();
+		$("#userPw_confirm").keyup(function() {
+			var pwd1=$("#userPw").val();
+			var pwd2=$("#userPw_confirm").val();
 			if(pwd1.length != 0 || pwd2.length != 0){
 				if(pwd1 == pwd2){
 					$("#pwd_check_false").css("display","none");
@@ -279,7 +279,7 @@
 // 			document.form.roadAddrPart2.value = roadAddrPart2;
 // 			document.userVO.addr_detail.value = addrDetail;
 			$("#addr_detail").val(addrDetail);
-			document.userVO.zip_no.value = zipNo;
+			document.userVO.zipNo.value = zipNo;
 		}
 	</script>
 </body>

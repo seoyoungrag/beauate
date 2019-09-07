@@ -1,8 +1,6 @@
 package com.beauate.ceo.admin.user.service.impl;
 
-import java.util.List;
-
-import javax.annotation.Resource;
+import java.util.Date;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -13,13 +11,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 
-import com.beauate.ceo.admin.user.service.UserDao;
 import com.beauate.ceo.admin.user.service.UserManageService;
 import com.beauate.ceo.admin.user.service.UserVO;
-import com.beauate.ceo.common.GlobalContants;
-import com.beauate.ceo.common.service.PaginationInfo;
 import com.beauate.core.entity.BeutyUser;
-import com.beauate.core.entity.PrgrMng;
 import com.beauate.core.repository.BeutyUserRepository;
 
 @Service("userManageService")
@@ -55,16 +49,16 @@ public class UserManageServiceImple implements UserManageService {
 		Page<BeutyUser> selectList = null;
 		if(userVO.getSearchKeyword()!=null && userVO.getSearchCondition()!=null) {
 			if(userVO.getDelYn()!=null&&!userVO.getDelYn().equals("")) {
-				if(userVO.getSearchCondition().equals("user_nm")) {
+				if(userVO.getSearchCondition().equals("userNm")) {
 				    selectList = beutyUserRepository.findByUserNmIgnoreCaseContainingAndDelYn(userVO.getSearchKeyword(), userVO.getDelYn(), pageable);
 				}else {
 				    selectList = beutyUserRepository.findByEmailAddrIgnoreCaseContainingAndDelYn(userVO.getSearchKeyword(), userVO.getDelYn(),pageable);
 				}
 			}else {
-				if(userVO.getSearchCondition().equals("user_nm")) {
-				    selectList = beutyUserRepository.findByUserNmIgnoreCaseContaining(userVO.getSearchKeyword(), pageable);
+				if(userVO.getSearchCondition().equals("userNm")) {
+				    selectList = beutyUserRepository.findByUserNmIgnoreCaseContainingAndDelYn(userVO.getSearchKeyword(), "N", pageable);
 				}else {
-				    selectList = beutyUserRepository.findByEmailAddrIgnoreCaseContaining(userVO.getSearchKeyword(), pageable);
+				    selectList = beutyUserRepository.findByUserNmIgnoreCaseContainingAndDelYn(userVO.getSearchKeyword(), "N", pageable);
 				}
 			}
 		}
@@ -167,8 +161,37 @@ public class UserManageServiceImple implements UserManageService {
 	 * @return
 	 * @throws Exception
 	 */ 
-	public void updateUserProc(UserVO userVO) throws Exception {
-		//userDao.updateUserProc(userVO);
+	public void updateUserProc(BeutyUser userVO) throws Exception {
+		BeutyUser user = beutyUserRepository.findById(userVO.getUserId()).get();
+		if(userVO.getUserNm()!=null) {
+			user.setUserNm(userVO.getUserNm());
+		}
+		if(userVO.getUserPw()!=null) {
+			user.setUserPw(userVO.getUserPw());
+		}
+		if(userVO.getUserEngNm()!=null) {
+			user.setUserEngNm(userVO.getUserEngNm());
+		}
+		if(userVO.getZipNo()!=null) {
+			user.setZipNo(userVO.getZipNo());
+		}
+		if(userVO.getAddr()!=null) {
+			user.setAddr(userVO.getAddr());
+		}
+		if(userVO.getAddrDetail()!=null) {
+			user.setAddrDetail(userVO.getAddrDetail());
+		}
+		if(userVO.getMblPno()!=null) {
+			user.setMblPno(userVO.getMblPno());
+		}
+		if(userVO.getPno()!=null) {
+			user.setPno(userVO.getPno());
+		}
+		if(userVO.getFaxNo()!=null) {
+			user.setFaxNo(userVO.getFaxNo());
+		}
+		user.setModDt(new Date());
+		beutyUserRepository.save(user);
 	}
 	
 	/**
@@ -190,7 +213,10 @@ public class UserManageServiceImple implements UserManageService {
 	 * @return
 	 * @throws Exception
 	 */ 
-	public void deleteUserProc(UserVO userVO) throws Exception {
-		//userDao.deleteUserProc(userVO);
+	public void deleteUserProc(BeutyUser userVO) throws Exception {
+		BeutyUser user = beutyUserRepository.findById(userVO.getUserId()).get();
+		user.setDelYn("Y");
+		beutyUserRepository.save(user);
+		//beutyUserRepository.delete(userVO);
 	}
 }

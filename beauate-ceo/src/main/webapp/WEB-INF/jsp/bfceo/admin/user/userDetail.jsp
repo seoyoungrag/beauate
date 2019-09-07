@@ -93,7 +93,7 @@
 					</table>
 				</div>
 				<div class="T_btnLayer fr">
-					<a href="${basePath}/usermgr/z/m/updateUser.do?user_id=${userVO.userId}"><button type="button" class="blueBtn L">수정</button></a>
+					<a href="${basePath}/usermgr/z/m/updateUser.do?userId=${userVO.userId}"><button type="button" class="blueBtn L">수정</button></a>
 					<a href="javascript:void(0);" onclick="javascript:fn_deleteUserProc();"><button type="button" class="blueBtn L">삭제</button></a>
 					<a href="${basePath}/usermgr/z/m/selectUserList.do"><button type="button" class="blueBtn L">목록</button></a>
 				</div>
@@ -112,8 +112,8 @@
 	<!--//footer-->
 	<script type="text/javascript">
 	var fn_deleteUserProc = function() {
-		$("#user_id").val('${userVO.userId}');
-		$("#email_addr").val('${userVO.emailAddr}');
+		$("#userId").val('${userVO.userId}');
+		$("#emailAddr").val('${userVO.emailAddr}');
 		document.userVO.submit();
 	};
 	</script>

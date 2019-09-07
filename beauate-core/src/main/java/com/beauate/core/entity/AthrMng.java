@@ -2,6 +2,9 @@ package com.beauate.core.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.beauate.core.common.CommDefaultVO;
+
 import java.util.Date;
 import java.util.List;
 
@@ -13,7 +16,7 @@ import java.util.List;
 @Entity
 @Table(name="ATHR_MNG")
 @NamedQuery(name="AthrMng.findAll", query="SELECT a FROM AthrMng a")
-public class AthrMng implements Serializable {
+public class AthrMng extends CommDefaultVO  implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id

@@ -2,7 +2,9 @@ package com.beauate.ceo.admin.program.service;
 
 import org.springframework.ui.ModelMap;
 
-public interface ProgramService {
+import com.beauate.core.entity.PrgrMng;
+
+public interface ProgramManageService {
 	
 	/**
 	 * <pre>
@@ -23,7 +25,7 @@ public interface ProgramService {
 	 * @return List<ProgramVO>
 	 * @throws Exception
 	 */ 	
-	public void selectProgramList(ProgramVO programVO, ModelMap model) throws Exception;
+	public void selectProgramList(PrgrMng programVO, ModelMap model) throws Exception;
 	
 	/**
 	 * <pre>
@@ -41,10 +43,10 @@ public interface ProgramService {
 	 *	-----------------------------------------------------------------------
 	 * 
 	 * @param programVO
-	 * @return int
+	 * @return long
 	 * @throws Exception
 	 */ 	
-	public void selectProgramParamChk(ProgramVO programVO, ModelMap model) throws Exception;
+	public long selectProgramParamChk(PrgrMng programVO, ModelMap model) throws Exception;
 	
 	/**
 	 * <pre>
@@ -65,7 +67,7 @@ public interface ProgramService {
 	 * @return int
 	 * @throws Exception
 	 */ 	
-	public void insertProgramProc(ProgramVO programVO) throws Exception;
+	public void insertProgramProc(PrgrMng programVO) throws Exception;
 	
 	/**
 	 * <pre>
@@ -86,7 +88,7 @@ public interface ProgramService {
 	 * @return ProgramVO
 	 * @throws Exception
 	 */ 	
-	public void selectProgramDetail(ProgramVO programVO, ModelMap model) throws Exception;
+	public void selectProgramDetail(PrgrMng programVO, ModelMap model) throws Exception;
 	
 	/**
 	 * <pre>
@@ -107,7 +109,7 @@ public interface ProgramService {
 	 * @return int
 	 * @throws Exception
 	 */ 	
-	public void updateProgramProc(ProgramVO programVO) throws Exception;
+	public void updateProgramProc(PrgrMng programVO) throws Exception;
 	
 	/**
 	 * <pre>
@@ -128,5 +130,5 @@ public interface ProgramService {
 	 * @return void
 	 * @throws Exception
 	 */
-	public void deleteProgramProc(ProgramVO programVO) throws Exception; 
+	public void deleteProgramProc(PrgrMng programVO) throws Exception; 
 }

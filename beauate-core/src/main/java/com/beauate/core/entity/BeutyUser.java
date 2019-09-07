@@ -38,9 +38,12 @@ public class BeutyUser extends CommDefaultVO  implements Serializable {
 
 	@Column(length=300)
 	private String addr;
+	
+	@Column(length=300)
+	private String addrDetail;
 
 	@Column(name="DEL_YN", length=1)
-	private String delYn;
+	private String delYn="N";
 
 	@Column(name="EMAIL_ADDR", length=100)
 	private String emailAddr;
@@ -223,6 +226,14 @@ public class BeutyUser extends CommDefaultVO  implements Serializable {
 
 	public void setCnntLogs(List<CnntLog> cnntLogs) {
 		this.cnntLogs = cnntLogs;
+	}
+
+	public String getAddrDetail() {
+		return addrDetail;
+	}
+
+	public void setAddrDetail(String addrDetail) {
+		this.addrDetail = addrDetail;
 	}
 
 	public CnntLog addCnntLog(CnntLog cnntLog) {
