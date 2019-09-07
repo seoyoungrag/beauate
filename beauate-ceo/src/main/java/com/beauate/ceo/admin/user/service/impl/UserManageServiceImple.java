@@ -50,15 +50,15 @@ public class UserManageServiceImple implements UserManageService {
 	 * @return
 	 * @throws Exception
 	 */
-	public void selectUserList(UserVO userVO, ModelMap model) throws Exception {
-		Pageable pageable = PageRequest.of(1, 10);
+	public void selectUserList(BeutyUser userVO, ModelMap model) throws Exception {
+		Pageable pageable = PageRequest.of(userVO.getPageIndex()-1, userVO.getPageUnit());
 		Page<BeutyUser> selectList = null;
 		if(userVO.getSearchKeyword()!=null && userVO.getSearchCondition()!=null) {
-			if(userVO.getDel_yn()!=null&&!userVO.getDel_yn().equals("")) {
+			if(userVO.getDelYn()!=null&&!userVO.getDelYn().equals("")) {
 				if(userVO.getSearchCondition().equals("user_nm")) {
-				    selectList = beutyUserRepository.findByUserNmIgnoreCaseContainingAndDelYn(userVO.getSearchKeyword(), userVO.getDel_yn(), pageable);
+				    selectList = beutyUserRepository.findByUserNmIgnoreCaseContainingAndDelYn(userVO.getSearchKeyword(), userVO.getDelYn(), pageable);
 				}else {
-				    selectList = beutyUserRepository.findByEmailAddrIgnoreCaseContainingAndDelYn(userVO.getSearchKeyword(), userVO.getDel_yn(),pageable);
+				    selectList = beutyUserRepository.findByEmailAddrIgnoreCaseContainingAndDelYn(userVO.getSearchKeyword(), userVO.getDelYn(),pageable);
 				}
 			}else {
 				if(userVO.getSearchCondition().equals("user_nm")) {
@@ -70,8 +70,10 @@ public class UserManageServiceImple implements UserManageService {
 		}
 		//총 카운트 
 		long cnt = selectList.getTotalElements();
-						
-		model.addAttribute("userList", selectList);
+		
+		userVO.setPageIndex(selectList.getPageable().getPageNumber()+1);
+		userVO.setPageSize(selectList.getPageable().getPageSize());
+		model.addAttribute("userList", selectList.getContent());
 		model.addAttribute("userListCnt", cnt);
 	}
 
@@ -94,9 +96,8 @@ public class UserManageServiceImple implements UserManageService {
 	 * @return
 	 * @throws Exception
 	 */ 
-	public UserVO selectUserDetail(UserVO userVO) throws Exception {
-		//return beutyUserRepository.findById(userVO.getUser_id());
-		return null;
+	public BeutyUser selectUserDetail(BeutyUser userVO) throws Exception {
+		return beutyUserRepository.findById(userVO.getUserId()).get();
 	}
 	
 	/**

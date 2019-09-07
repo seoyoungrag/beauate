@@ -12,6 +12,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.beauate.ceo.admin.user.service.UserManageService;
 import com.beauate.ceo.admin.user.service.UserVO;
+import com.beauate.core.entity.BeutyUser;
 
 @Controller
 public class UserManageController {
@@ -41,7 +42,7 @@ public class UserManageController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/usermgr/z/m/selectUserList.do")
-	public String selectUserList(@ModelAttribute("userVO") UserVO userVO, ModelMap model) throws Exception {
+	public String selectUserList(@ModelAttribute("userVO") BeutyUser userVO, ModelMap model) throws Exception {
 		userManageService.selectUserList(userVO, model);
 		return "/admin/user/userList";
 	}
@@ -67,7 +68,7 @@ public class UserManageController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/usermgr/z/m/selectUserDetail.do")
-	public String selectUserDetail(@ModelAttribute("userVO") UserVO userVO, ModelMap model) throws Exception {
+	public String selectUserDetail(@ModelAttribute("userVO") BeutyUser userVO, ModelMap model) throws Exception {
 		userVO = userManageService.selectUserDetail(userVO);
 		model.addAttribute("userVO", userVO);
 		return "/admin/user/userDetail";
@@ -191,7 +192,7 @@ public class UserManageController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/usermgr/z/m/updateUser.do")
-	public String updateUser(@ModelAttribute("userVO") UserVO userVO, ModelMap model) throws Exception {
+	public String updateUser(@ModelAttribute("userVO") BeutyUser userVO, ModelMap model) throws Exception {
 		userVO = userManageService.selectUserDetail(userVO);
 		model.addAttribute("userVO", userVO);
 		return "/admin/user/userUpdate";

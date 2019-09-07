@@ -2,6 +2,8 @@ package com.beauate.ceo.admin.user.service;
 
 import org.springframework.ui.ModelMap;
 
+import com.beauate.core.entity.BeutyUser;
+
 public interface UserManageService {
 	
 	/**
@@ -24,7 +26,7 @@ public interface UserManageService {
 	 * @return
 	 * @throws Exception
 	 */ 
-	public void selectUserList(UserVO userVO, ModelMap model) throws Exception;
+	public void selectUserList(BeutyUser userVO, ModelMap model) throws Exception;
 	
 	/**
 	 * <pre>
@@ -45,7 +47,7 @@ public interface UserManageService {
 	 * @return
 	 * @throws Exception
 	 */ 
-	public UserVO selectUserDetail(UserVO userVO) throws Exception;
+	public BeutyUser selectUserDetail(BeutyUser userVO) throws Exception;
 	
 	/**
 	 * <pre>

@@ -10,7 +10,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import com.beauate.core.entity.BeutyUser;
 
 @RepositoryRestResource(collectionResourceRel = "beutyUser", path = "beutyUser")
-public interface BeutyUserRepository extends JpaRepository<BeutyUser,String>{
+public interface BeutyUserRepository extends JpaRepository<BeutyUser,Integer>{
 
 	Page<BeutyUser> findByUserNmIgnoreCaseContainingAndDelYn(String searchKeyword, String delYn, Pageable pageable);
 

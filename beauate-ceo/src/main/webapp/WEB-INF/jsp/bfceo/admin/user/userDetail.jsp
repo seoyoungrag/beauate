@@ -43,15 +43,15 @@
 						<tbody class="line">
 							<tr>
 								<th>사용자일련번호</th>
-								<td><c:out value="${userVO.user_id}"/></td>
+								<td><c:out value="${userVO.userId}"/></td>
 								<th>E-mail</th>
-								<td><c:out value="${userVO.email_addr}"/></td>
+								<td><c:out value="${userVO.emailAddr}"/></td>
 							</tr>
 							<tr>
 								<th>이름</th>
-								<td><c:out value="${userVO.user_nm}"/></td>
+								<td><c:out value="${userVO.userNm}"/></td>
 								<th>가입일</th>
-								<td colspan="4"><fmt:formatDate value="${userVO.join_dt}" pattern="yyyy-MM-dd"/></td>
+								<td colspan="4"><fmt:formatDate value="${userVO.joinDt}" pattern="yyyy-MM-dd"/></td>
 							</tr>
 						</tbody>
 					</table>
@@ -69,31 +69,31 @@
 						<tbody class="line">
 							<tr>
 								<th>영문이름(여권표기명)</th>
-								<td><c:out value="${userVO.user_eng_nm}"/></td>
+								<td><c:out value="${userVO.userEngNm}"/></td>
 								<th>전화번호</th>
 								<td><c:out value="${userVO.pno}"/></td>
 							</tr>
 							<tr>
 								<th>주소</th>
-								<td colspan="4">(<c:out value="${userVO.zip_no}"/>) <c:out value="${userVO.addr}"/></td>
+								<td colspan="4">(<c:out value="${userVO.zipNo}"/>) <c:out value="${userVO.addr}"/></td>
 							</tr>
 							<tr>
 								<th>휴대폰</th>
-								<td><c:out value="${userVO.mbl_pno}"/></td>
+								<td><c:out value="${userVO.mblPno}"/></td>
 								<th>전화번호</th>
 								<td><c:out value="${userVO.pno}"/></td>
 							</tr>
 							<tr>
 								<th>팩스번호</th>
-								<td><c:out value="${userVO.fax_no}"/></td>
+								<td><c:out value="${userVO.faxNo}"/></td>
 								<th>수정일시</th>
-								<td><c:if test="${empty userVO.mod_dt}">-</c:if><fmt:formatDate value="${userVO.mod_dt}" pattern="yyyy-MM-dd"/></td>
+								<td><c:if test="${empty userVO.modDt}">-</c:if><fmt:formatDate value="${userVO.modDt}" pattern="yyyy-MM-dd"/></td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 				<div class="T_btnLayer fr">
-					<a href="${basePath}/usermgr/z/m/updateUser.do?user_id=${userVO.user_id}"><button type="button" class="blueBtn L">수정</button></a>
+					<a href="${basePath}/usermgr/z/m/updateUser.do?user_id=${userVO.userId}"><button type="button" class="blueBtn L">수정</button></a>
 					<a href="javascript:void(0);" onclick="javascript:fn_deleteUserProc();"><button type="button" class="blueBtn L">삭제</button></a>
 					<a href="${basePath}/usermgr/z/m/selectUserList.do"><button type="button" class="blueBtn L">목록</button></a>
 				</div>
@@ -102,8 +102,8 @@
 		<!--container End-->
 	</div>
 	<form:form modelAttribute="userVO" name="userVO" id="userVO" method="post" action="${basePath}/usermgr/z/n/deleteUserProc.do" onsubmit="return false;">
-		<form:hidden path="user_id" id="user_id"/>
-		<form:hidden path="email_addr" id="email_addr"/>
+		<form:hidden path="userId" id="userId"/>
+		<form:hidden path="emailAddr" id="emailAddr"/>
 	</form:form>
 	<!--wrap End-->
 	<div class="footer">
@@ -112,8 +112,8 @@
 	<!--//footer-->
 	<script type="text/javascript">
 	var fn_deleteUserProc = function() {
-		$("#user_id").val('${userVO.user_id}');
-		$("#email_addr").val('${userVO.email_addr}');
+		$("#user_id").val('${userVO.userId}');
+		$("#email_addr").val('${userVO.emailAddr}');
 		document.userVO.submit();
 	};
 	</script>

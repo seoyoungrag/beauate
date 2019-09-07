@@ -7,9 +7,9 @@
         <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.password">sjdznf</property>
-        <property name="hibernate.connection.url">jdbc:mysql://58.143.16.231:3306/beuty_db?useSSL=false&amp;serverTimezone=Asia/Seoul</property>
-        <property name="hibernate.connection.username">beuty_admin</property>
-        <property name="hibernate.default_schema">beuty_db</property>
+        <property name="hibernate.connection.url">jdbc:mysql://192.168.0.2:3306/beaute_db?useSSL=false&amp;serverTimezone=Asia/Seoul</property>
+        <property name="hibernate.connection.username">beauate_admin</property>
+        <property name="hibernate.default_schema">beauate_db</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.search.autoregister_listeners">false</property>
         <property name="hibernate.validator.apply_to_ddl">false</property>

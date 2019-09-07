@@ -1,4 +1,4 @@
-package com.beauate.ceo.common.service;
+package com.beauate.core.common;
 
 import java.io.Serializable;
 import java.util.Date;

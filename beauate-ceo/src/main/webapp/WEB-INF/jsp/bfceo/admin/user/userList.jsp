@@ -36,8 +36,8 @@
 					<form:hidden path="sortDescend" id="sortDescend"/>
 					<div class="selectBox">
 						<form:select path="searchCondition" class="w13p">
-							<form:option value="user_nm">이름</form:option>
-							<form:option value="email_addr">메일</form:option>
+							<form:option value="userNm">이름</form:option>
+							<form:option value="emailAddr">메일</form:option>
 						</form:select> 
 						<form:input type="text" class="searchName" path="searchKeyword"/>
 						<button type="button" class="grayBtn ico" onclick="javascript:fn_searchList(1);">
@@ -59,20 +59,20 @@
 						<thead>
 							<th class="noBg">번호</th>
 							<th>사용자일련번호
-								<span class="arrow_ascending"><a href="javascript:void(0);" onclick="javascript:fn_sort(this, 'user_id')"></a></span>
-								<span class="arrow_descending"><a href="javascript:void(0);" onclick="javascript:fn_sort(this, 'user_id')"></a></span>
+								<span class="arrow_ascending"><a href="javascript:void(0);" onclick="javascript:fn_sort(this, 'userId')"></a></span>
+								<span class="arrow_descending"><a href="javascript:void(0);" onclick="javascript:fn_sort(this, 'userId')"></a></span>
 							</th>
 							<th>성명
-								<span class="arrow_ascending"><a href="javascript:void(0);" onclick="javascript:fn_sort(this, 'user_nm')"></a></span>
-								<span class="arrow_descending"><a href="javascript:void(0);" onclick="javascript:fn_sort(this, 'user_nm')"></a></span>
+								<span class="arrow_ascending"><a href="javascript:void(0);" onclick="javascript:fn_sort(this, 'userNm')"></a></span>
+								<span class="arrow_descending"><a href="javascript:void(0);" onclick="javascript:fn_sort(this, 'userNm')"></a></span>
 							</th>
 							<th>메일
-								<span class="arrow_ascending"><a href="javascript:void(0);" onclick="javascript:fn_sort(this, 'email_addr')"></a></span> 
-								<span class="arrow_descending"><a href="javascript:void(0);" onclick="javascript:fn_sort(this, 'email_addr')"></a></span>
+								<span class="arrow_ascending"><a href="javascript:void(0);" onclick="javascript:fn_sort(this, 'emailAddr')"></a></span> 
+								<span class="arrow_descending"><a href="javascript:void(0);" onclick="javascript:fn_sort(this, 'emailAddr')"></a></span>
 							</th>
 							<th>가입일자 
-								<span class="arrow_ascending"><a href="javascript:void(0);" onclick="javascript:fn_sort(this, 'join_dt')"></a></span> 
-								<span class="arrow_descending"><a href="javascript:void(0);" onclick="javascript:fn_sort(this, 'join_dt')"></a></span>
+								<span class="arrow_ascending"><a href="javascript:void(0);" onclick="javascript:fn_sort(this, 'joinDt')"></a></span> 
+								<span class="arrow_descending"><a href="javascript:void(0);" onclick="javascript:fn_sort(this, 'joinDt')"></a></span>
 							</th>
 						</thead>
 						<tbody>
@@ -80,11 +80,11 @@
 								<c:when test="${fn:length(userList) != 0}">
 									<c:forEach items="${userList}" var="list" varStatus="i">
 										<tr class="row">
-											<td><c:out value="${userVO.firstIndex + i.count}"/></td>
-											<td><c:out value="${list.user_id}"/></td>
-											<td><c:out value="${list.user_nm}"/></td>
-											<td><a href="${basePath}/usermgr/z/m/selectUserDetail.do?user_id=<c:out value='${list.user_id}'/>"><c:out value="${list.email_addr}"/></a></td>
-											<td><fmt:formatDate value="${list.join_dt}" pattern="yyyy-MM-dd"/></td>
+											<td><c:out value="${i.count}"/></td>
+											<td><c:out value="${list.userId}"/></td>
+											<td><c:out value="${list.userNm}"/></td>
+											<td><a href="${basePath}/usermgr/z/m/selectUserDetail.do?userId=<c:out value='${list.userId}'/>"><c:out value="${list.emailAddr}"/></a></td>
+											<td><fmt:formatDate value="${list.joinDt}" pattern="yyyy-MM-dd"/></td>
 										</tr>
 									</c:forEach>
 								</c:when>

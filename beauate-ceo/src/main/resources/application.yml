@@ -18,8 +18,8 @@ spring:
   profiles: local
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://58.143.16.231:3306/beuty_db?useSSL=false&serverTimezone=Asia/Seoul
-    username: beuty_admin
+    url: jdbc:mysql://192.168.0.5:3306/beauate_db?useSSL=false&serverTimezone=Asia/Seoul
+    username: beauate_admin
     password: sjdznf
     initialization-mode: always
   data:
