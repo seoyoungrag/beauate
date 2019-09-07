@@ -136,7 +136,7 @@ fn_PopClose = function () {
 
 fn_roleUserDeleteProc = function () {
 	
-	if ($("select[name=usrId] option:selected").length == 0) {
+	if ($("select[name=userIdsForSave] option:selected").length == 0) {
 		alert("선택 된 사용자가 없습니다.");
 		return false;
 	}

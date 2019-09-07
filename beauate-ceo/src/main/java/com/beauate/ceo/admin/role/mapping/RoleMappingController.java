@@ -5,14 +5,16 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 
-import com.beauate.ceo.admin.user.service.UserVO;
 import com.beauate.core.entity.AthrMng;
+import com.beauate.core.entity.BeutyUser;
 
+@Controller
 public class RoleMappingController {
 
 	@Resource(name = "roleMappingService")
@@ -71,7 +73,7 @@ public class RoleMappingController {
 	@RequestMapping(value = "/roleuser/r/n/ajaxUserInfoList.do")
 	public String ajaxUserInfoList(AthrMng roleVO, ModelMap model) throws Exception {
 
-		List<AthrMng> roleUserList = roleMappingService.selectRoleUserList(roleVO);
+		List<BeutyUser> roleUserList = roleMappingService.selectRoleUserList(roleVO);
 		model.addAttribute("roleUserList", roleUserList);
 		model.addAttribute("roleGroup", roleVO.getAthrCd());
 
@@ -101,7 +103,7 @@ public class RoleMappingController {
 	@RequestMapping(value = "/roleuser/w/n/insertRoleUserPopup.do")
 	public String insertRoleUserPopup(AthrMng roleVO, ModelMap model) throws Exception {
 
-		List<AthrMng> roleUserListForUpdate = roleMappingService.selectUserListForUpdateRole(roleVO);
+		List<BeutyUser> roleUserListForUpdate = roleMappingService.selectUserListForUpdateRole(roleVO);
 
 		model.addAttribute("roleUserListForUpdate", roleUserListForUpdate);
 		model.addAttribute("roleCode", roleVO.getAthrCd());
@@ -132,7 +134,7 @@ public class RoleMappingController {
 	@RequestMapping(value = "/roleuser/w/n/selectSearchRoleUserList.do")
 	public String selectSearchRoleUserList(AthrMng roleVO, ModelMap model) throws Exception {
 		
-		List<AthrMng> roleUserListForUpdate = roleMappingService.selectUserListForUpdateRole(roleVO);
+		List<BeutyUser> roleUserListForUpdate = roleMappingService.selectUserListForUpdateRole(roleVO);
 
 		model.addAttribute("roleUserListForUpdate", roleUserListForUpdate);
 		
@@ -224,11 +226,8 @@ public class RoleMappingController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/userrole/z/m/selectUserRoleList.do")
-	public String selectUserRoleList(@ModelAttribute("userVO") UserVO userVO, ModelMap model) throws Exception {
-		
-		Map<String, Object> rslt = roleMappingService.selectUserRoleList(userVO, model);
-		model.addAttribute("rslt", rslt);
-		
+	public String selectUserRoleList(@ModelAttribute("userVO") BeutyUser userVO, ModelMap model) throws Exception {
+		roleMappingService.selectUserRoleList(userVO, model);
 		return "/admin/role/userRoleMng/selectUserRoleList";
 	}
 	
@@ -253,9 +252,9 @@ public class RoleMappingController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/userrole/z/n/selectUserRolePopList.do")
-	public String selectUserRolePopList(AthrMng roleVO, ModelMap model) throws Exception {
+	public String selectUserRolePopList(BeutyUser userVO, ModelMap model) throws Exception {
 		
-		Map<String, Object> rslt = roleMappingService.selectUserRoleForPopup(roleVO);
+		Map<String, Object> rslt = roleMappingService.selectUserRoleForPopup(userVO);
 		model.addAttribute("rslt", rslt);
 		
 		return "/admin/role/userRoleMng/popUpLayer/insertUserRole";
@@ -281,9 +280,9 @@ public class RoleMappingController {
 	 * @throws Exception
 	 */ 	
 	@RequestMapping(value = "/userrole/z/n/saveUserRoleProc.do")
-	public String saveUserRoleProc(AthrMng roleVO) throws Exception {
+	public String saveUserRoleProc(BeutyUser userVO) throws Exception {
 		
-		roleMappingService.updateUserRoleMapping(roleVO);
+		roleMappingService.updateUserRoleMapping(userVO);
 		
 		return "redirect:/userrole/z/m/selectUserRoleList.do";
 	}

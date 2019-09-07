@@ -1,8 +1,5 @@
 package com.beauate.ceo.admin.role.web;
 
-import java.util.List;
-import java.util.Map;
-
 import javax.annotation.Resource;
 
 import org.apache.commons.logging.Log;
@@ -14,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.beauate.ceo.admin.role.service.RoleManageService;
-import com.beauate.ceo.admin.user.service.UserVO;
 import com.beauate.ceo.login.service.LoginVO;
 import com.beauate.core.entity.AthrMng;
 

@@ -12,7 +12,7 @@
 	<thead>
 		<th class="noBg">
 			<label class="blind" for=""></label>
-			<input type="checkbox" id="allCheck" onclick="fn_allCheckToggle(this, 'usrId');"/>
+			<input type="checkbox" id="allCheck" onclick="fn_allCheckToggle(this, 'userId');"/>
 		</th>
 		<th>사용자 ID</th>
 		<th>사용자 명</th>
@@ -26,11 +26,11 @@
 					<tr class="row popUpList">
 						<td>
 							<label class="blind" for=""></label>
-							<input type="checkbox" id="target0${st.index}" name="usrId" value="${list.usrId}" />
+							<input type="checkbox" id="target0${st.index}" name="userId" value="${list.userId}" />
 						</td>
-						<td><c:out value="${list.usrId}"/></td>
-						<td><c:out value="${list.usrNm}"/></td>
-						<td><c:out value="${list.athrCd}"/></td>
+						<td><c:out value="${list.userId}"/></td>
+						<td><c:out value="${list.userNm}"/></td>
+									<td><c:out value="${list.athrMngs[0].athrCd}"/></td>
 					</tr>
 				</c:forEach>
 			</c:when>

@@ -41,7 +41,7 @@
 </div>
 
 <form id="updateForm" method="post">
-	<input type="hidden" name="usrId" value="${rslt.tempRole.usrId}">
+	<input type="hidden" name="userId" value="${rslt.tempRole.userId}">
 	<input type="hidden" name="athrId" id="formathrId">
 </form>
 

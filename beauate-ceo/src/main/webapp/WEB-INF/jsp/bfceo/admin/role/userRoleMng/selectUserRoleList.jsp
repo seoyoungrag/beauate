@@ -38,8 +38,8 @@
 	<form:hidden path="sortDescend"/>
 			<div class="selectBox">
 				<form:select path="searchCondition" class="w13p">
-					<form:option value="usrId" label="사용자 ID"/>
-					<form:option value="usrNm" label="사용자 명"/>
+					<form:option value="userId" label="사용자 ID"/>
+					<form:option value="userNm" label="사용자 명"/>
 				</form:select>
 				<form:input path="searchKeyword" cssStyle="width: 737px;" cssClass="searchName"/>
 				<button type="button" class="grayBtn ico" onclick="fn_search(1);">
@@ -54,8 +54,6 @@
 						<col width="15%">
 						<col width="15%">
 						<col width="24%">
-						<col width="28%">
-						<col width="18%">
 					</colgroup>
 					<thead>
 						<th class="noBg">사용자ID
@@ -66,27 +64,17 @@
 							<span class="arrow_ascending"><a href="#"></a></span>
 							<span class="arrow_descending"><a href="#"></a></span>
 						</th>
-						<th>직위명
-							<span class="arrow_ascending"><a href="#"></a></span>
-							<span class="arrow_descending"><a href="#"></a></span>
-						</th>
-						<th>부서
-							<span class="arrow_ascending"><a href="#"></a></span>
-							<span class="arrow_descending"><a href="#"></a></span>
-						</th>
 						<th>등록권한</th>
 					</thead>
 					<tbody>
 					<!-- foreach 로 제어 될 부분 -->
 					<c:choose>
-						<c:when test="${not empty rslt.userRoleList}">
-							<c:forEach items="${rslt.userRoleList}" var="list" varStatus="st">
+						<c:when test="${not empty userRoleList}">
+							<c:forEach items="${userRoleList}" var="list" varStatus="st">
 								<tr class="row">
-									<td><c:out value="${list.usrId}"/></td>
-									<td><c:out value="${list.usrNm}"/></td>
-									<td><c:out value="${list.psitNm}"/></td>
-									<td><c:out value="${list.ogNm}"/></td>
-									<td><button type="button" class="grayBtn S" onclick="fn_popUpLayer('${list.usrId}');">확인</button></td>
+									<td><c:out value="${list.userId}"/></td>
+									<td><c:out value="${list.userNm}"/></td>
+									<td><button type="button" class="grayBtn S" onclick="fn_popUpLayer('${list.userId}');">확인</button></td>
 								</tr>
 							</c:forEach>
 						</c:when>
@@ -121,7 +109,7 @@ fn_popUpLayer = function (_userId) {
 	$.ajax({
 		url : _url
 		, data : {
-			usrId : _userId
+			userId : _userId
 		}
 	}).done(function (res) {
 		$("#windowPopup").html(res);

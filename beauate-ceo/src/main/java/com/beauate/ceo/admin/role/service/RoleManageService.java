@@ -1,11 +1,7 @@
 package com.beauate.ceo.admin.role.service;
 
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.ui.ModelMap;
 
-import com.beauate.ceo.admin.user.service.UserVO;
 import com.beauate.core.entity.AthrMng;
 
 public interface RoleManageService {

@@ -5,8 +5,8 @@ import java.util.Map;
 
 import org.springframework.ui.ModelMap;
 
-import com.beauate.ceo.admin.user.service.UserVO;
 import com.beauate.core.entity.AthrMng;
+import com.beauate.core.entity.BeutyUser;
 
 interface RoleMappingService {
 
@@ -50,7 +50,7 @@ interface RoleMappingService {
 		 * @return
 		 * @throws Exception
 		 */
-		public List<AthrMng> selectRoleUserList(AthrMng roleVO) throws Exception;
+		public List<BeutyUser> selectRoleUserList(AthrMng roleVO) throws Exception;
 		
 		
 		/**
@@ -72,7 +72,7 @@ interface RoleMappingService {
 		 * @return
 		 * @throws Exception
 		 */
-		public List<AthrMng> selectUserListForUpdateRole(AthrMng roleVO) throws Exception;
+		public List<BeutyUser> selectUserListForUpdateRole(AthrMng roleVO) throws Exception;
 		
 		/**
 		 * <pre>
@@ -93,7 +93,7 @@ interface RoleMappingService {
 		 * @return
 		 * @throws Exception
 		 */ 	
-		public int mergeIntoRoleUserMapping(AthrMng roleVO) throws Exception;
+		public int mergeIntoRoleUserMapping(BeutyUser userVO) throws Exception;
 		
 		/**
 		 * <pre>
@@ -135,7 +135,7 @@ interface RoleMappingService {
 		 * @return
 		 * @throws Exception
 		 */
-		public Map<String, Object> selectUserRoleList(UserVO userVO, ModelMap model) throws Exception;
+		public void selectUserRoleList(BeutyUser userVO, ModelMap model) throws Exception;
 		
 		/**
 		 * <pre>
@@ -156,7 +156,7 @@ interface RoleMappingService {
 		 * @return
 		 * @throws Exception
 		 */
-		public Map<String, Object> selectUserRoleForPopup(AthrMng roleVO) throws Exception;
+		public Map<String, Object> selectUserRoleForPopup(BeutyUser userVO) throws Exception;
 		
 		/**
 		 * <pre>
@@ -177,5 +177,5 @@ interface RoleMappingService {
 		 * @return
 		 * @throws Exception
 		 */
-		public int updateUserRoleMapping(AthrMng roleVO) throws Exception;
+		public int updateUserRoleMapping(BeutyUser userVO) throws Exception;
 }

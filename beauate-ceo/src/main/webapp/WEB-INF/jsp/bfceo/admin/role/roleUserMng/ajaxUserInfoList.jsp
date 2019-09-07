@@ -6,9 +6,9 @@
 </span>
 <form id="deleteForm" method="post">
 	<div class="menuBigTable">
-		<select multiple="multiple" style="width: 470px; height: 400px; overflow-y : auto;" name="usrId">
+		<select multiple="multiple" style="width: 470px; height: 400px; overflow-y : auto;" name="userIdsForSave">
 			<c:forEach items="${roleUserList}" var="list">
-				<option label="<c:out value='${list.usrId} / ${list.usrNm}'/>" value="${list.usrId}"/>
+				<option label="<c:out value='${list.userId} / ${list.userNm}'/>" value="${list.userId}"/>
 			</c:forEach>
 		</select>
 	</div>

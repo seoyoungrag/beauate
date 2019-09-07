@@ -58,6 +58,9 @@ public class AthrMng extends CommDefaultVO  implements Serializable {
 	@ManyToMany(mappedBy="athrMngs")
 	private List<MenuMng> menuMngs;
 
+	@Transient
+	private String userIdsForSave;
+	
 	public AthrMng() {
 	}
 
@@ -148,5 +151,15 @@ public class AthrMng extends CommDefaultVO  implements Serializable {
 	public void setMenuMngs(List<MenuMng> menuMngs) {
 		this.menuMngs = menuMngs;
 	}
+
+	public String getUserIdsForSave() {
+		return userIdsForSave;
+	}
+
+	public void setUserIdsForSave(String userIdsForSave) {
+		this.userIdsForSave = userIdsForSave;
+	}
+	
+	
 
 }

@@ -14,8 +14,8 @@
 		<h4 class="w_contentTitle_h4">사용자 정보</h4>
 		<div class="selectBox">
 			<select id="searchCondition" class="w25p">
-				<option value="usrId">사용자 아이디</option>
-				<option value="usrNm">사용자 명</option>
+				<option value="userId">사용자 아이디</option>
+				<option value="userNm">사용자 명</option>
 			</select>
 			<input class="searchName" id="searchKeyword"  type="text" style="width: 222px;"/>
 			<button type="button" class="grayBtn ico" onclick="fn_search();">
@@ -51,9 +51,9 @@
 										<label class="blind" for=""></label>
 										<input type="checkbox" id="target0${st.index}" name="forCheck"/>
 									</td>
-									<td><c:out value="${list.usrId}"/></td>
-									<td><c:out value="${list.usrNm}"/></td>
-									<td><c:out value="${list.athrCd}"/></td>
+									<td><c:out value="${list.userId}"/></td>
+									<td><c:out value="${list.userNm}"/></td>
+									<td><c:out value="${list.athrMngs[0].athrCd}"/></td>
 								</tr>
 							</c:forEach>
 						</c:when>
@@ -102,7 +102,7 @@
 
 <form id="updateForm" method="post">
 	<input type="hidden" name="athrCd" value="${roleCode}"/>
-	<input type="hidden" name="usrId" id="usrId"/>
+	<input type="hidden" name="userIdsForSave" id="userId"/>
 </form>
 
 <script type="text/javascript">
@@ -179,7 +179,7 @@ fn_updateProc = function () {
 	});
 
 	var _userListArr = $("#addRoleUserList").val(); // 전송 될 데이터
-	$("#usrId").val(_userListArr);
+	$("#userId").val(_userListArr);
 	if (confirm("선택 하신 사용자의 권한을 변경 하시겠습니까?")) {
 		$("#updateForm").attr("action", "${basePath}/roleuser/z/n/saveRoleUserProc.do").submit();
 	}

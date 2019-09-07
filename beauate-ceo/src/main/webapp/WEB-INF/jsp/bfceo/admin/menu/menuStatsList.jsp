@@ -58,9 +58,9 @@
 					</c:otherwise>
 				</c:choose>
 			</th>
-			<th sortId="usrId">아이디
+			<th sortId="userId">아이디
 				<c:choose>
-					<c:when test="${menuStatsVO.sortSubject == 'usrId'}">
+					<c:when test="${menuStatsVO.sortSubject == 'userId'}">
 						<span class="${menuStatsVO.sortDescend == 'desc' ? 'arrow_ascending' : 'arrow_descending'}"><a href="#" onclick="javascript:fn_sort(this);"></a></span>
 					</c:when>
 					<c:otherwise>
@@ -79,7 +79,7 @@
 						<td><c:out value="${list.menuNm}"/></td>
 						<td><c:out value="${list.accessUrl}"/></td>
 						<td><c:out value="${list.accessIp}"/></td>
-						<td><c:out value="${list.usrId}"/></td>
+						<td><c:out value="${list.userId}"/></td>
 					</tr>
 				</c:forEach>
 			</c:when>
