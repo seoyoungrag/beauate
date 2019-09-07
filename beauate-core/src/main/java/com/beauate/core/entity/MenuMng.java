@@ -2,6 +2,9 @@ package com.beauate.core.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.beauate.core.common.CommDefaultVO;
+
 import java.util.Date;
 import java.util.List;
 
@@ -13,7 +16,7 @@ import java.util.List;
 @Entity
 @Table(name="MENU_MNG")
 @NamedQuery(name="MenuMng.findAll", query="SELECT m FROM MenuMng m")
-public class MenuMng implements Serializable {
+public class MenuMng extends CommDefaultVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -73,7 +76,7 @@ public class MenuMng implements Serializable {
 	private List<AthrMng> athrMngs;
 
 	//bi-directional many-to-one association to MenuStat
-	@OneToMany(mappedBy="menuMng")
+	@OneToMany(mappedBy="menuMng", fetch=FetchType.EAGER)
 	private List<MenuStat> menuStats;
 
 	//bi-directional many-to-one association to PrgrMng

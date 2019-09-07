@@ -13,8 +13,8 @@ public class LoginVO extends UserVO implements Serializable {
 //    
 //	private ArrayList<RoleVO> roleList = new ArrayList<RoleVO>(); 
 //    private ArrayList<RoleVO> ifmsRoleList = new ArrayList<RoleVO>();
-//    private List<MenuVO> userMenu = new ArrayList<MenuVO>();
-//    private List<MenuVO> tabMenu = new ArrayList<MenuVO>();
+//    private List<MenuMng> userMenu = new ArrayList<MenuMng>();
+//    private List<MenuMng> tabMenu = new ArrayList<MenuMng>();
 //    private List<String> checkTab = new ArrayList<String>();
 //    private String query;
 	public String getPortalAdmin() {
