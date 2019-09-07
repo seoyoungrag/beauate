@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/bfceo/common/include.jsp"%>
-<form:form commandName="menuStatsVO" id="listForm" name="listForm">
+<form:form modelAttribute="menuStatsVO" id="listForm" name="listForm">
 <form:hidden path="pageIndex"/>
 <form:hidden path="sortSubject"/>
 <form:hidden path="sortDescend"/>
@@ -26,9 +26,9 @@
 					</c:otherwise>
 				</c:choose>
 			</th>
-			<th sortId="menuName">메뉴명
+			<th sortId="menuNm">메뉴명
 				<c:choose>
-					<c:when test="${menuStatsVO.sortSubject == 'menuName'}">
+					<c:when test="${menuStatsVO.sortSubject == 'menuNm'}">
 						<span class="${menuStatsVO.sortDescend == 'desc' ? 'arrow_ascending' : 'arrow_descending'}"><a href="#" onclick="javascript:fn_sort(this);"></a></span>
 					</c:when>
 					<c:otherwise>
@@ -76,7 +76,7 @@
 				<c:forEach items="${menuChartList}" var="list" varStatus="status">
 					<tr class="row">
 						<td><c:out value="${list.accessDate}"/></td>
-						<td><c:out value="${list.menuName}"/></td>
+						<td><c:out value="${list.menuNm}"/></td>
 						<td><c:out value="${list.accessUrl}"/></td>
 						<td><c:out value="${list.accessIp}"/></td>
 						<td><c:out value="${list.usrId}"/></td>

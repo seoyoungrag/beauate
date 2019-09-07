@@ -1,9 +1,6 @@
 package com.beauate.ceo.admin.role.service.impl;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.apache.commons.logging.Log;
@@ -16,10 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 
 import com.beauate.ceo.admin.role.service.RoleManageService;
-import com.beauate.ceo.admin.user.service.UserVO;
-import com.beauate.ceo.common.service.PaginationInfo;
 import com.beauate.core.entity.AthrMng;
-import com.beauate.core.entity.PrgrMng;
 import com.beauate.core.repository.AthrMngRepository;
 
 @Service("roleService")

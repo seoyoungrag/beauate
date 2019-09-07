@@ -27,10 +27,10 @@
 							<tr class="row">
 								<td>
 									<label class="blind" for=""></label>
-									<input type="checkbox" id="${list.rlId }" name="tableChk" value="${list.rlCd }"  roleName="${list.rlName }" indexNum="${status.index}"/>
+									<input type="checkbox" id="${list.athrId }" name="tableChk" value="${list.athrCd }"  roleName="${list.athrNm }" indexNum="${status.index}"/>
 								</td>
-			                    <td><c:out value="${list.rlCd }"></c:out></td>
-			                    <td><c:out value="${list.rlName }"></c:out></td>
+			                    <td><c:out value="${list.athrCd }"></c:out></td>
+			                    <td><c:out value="${list.athrNm }"></c:out></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -48,7 +48,7 @@
 		<div class="user_info">
 			<h4 class="h4_other">메뉴 맵핑 목록</h4>
 			<!--메뉴체계도-->
-			<form:form commandName="menuVO" name="roleMappForm" id="roleMappForm" onsubmit="return false;">
+			<form:form modelAttribute="menuVO" name="roleMappForm" id="roleMappForm" onsubmit="return false;">
 				<form:hidden path="menuId"/>
 				<div class="w_menuBigTable" id="p0">
 					<div class="info_table">
@@ -72,18 +72,18 @@
 								<th>관리</th>
 							</thead>
 							<tbody id="inRole">
-								<c:forEach items="${menuVO.roleMappList}" var="list" varStatus="status">
-									<spring:nestedPath path="roleMappList[${status.index}]">
+								<c:forEach items="${menuVO.athrMngs}" var="list" varStatus="status">
+									<spring:nestedPath path="athrMngs[${status.index}]">
 										<tr class="row">
 											<td>
 												<label class="blind" for=""></label>
-												<input type="checkbox" id="${list.rlId }" name="tableChk" value="${list.rlCd }"  roleName="${list.rlName }" indexNum ="${status.index}"/></td>
+												<input type="checkbox" id="${list.athrId }" name="tableChk" value="${list.athrCd }"  roleName="${list.athrNm }" indexNum ="${status.index}"/></td>
 											</td>
-											<td><c:out value="${list.rlName }"></c:out></td>
-					                    	<form:hidden path="rlId" />
-						                    <td><form:radiobutton path="rlDiv" value="r"/></td>
-						                    <td><form:radiobutton path="rlDiv" value="w"/></td>
-						                    <td><form:radiobutton path="rlDiv" value="z"/></td>
+											<td><c:out value="${list.athrNm }"></c:out></td>
+					                    	<form:hidden path="athrId" />
+						                    <td><form:radiobutton path="athrCl" value="r"/></td>
+						                    <td><form:radiobutton path="athrCl" value="w"/></td>
+						                    <td><form:radiobutton path="athrCl" value="z"/></td>
 										</tr>								
 									</spring:nestedPath>
 								</c:forEach>
@@ -136,10 +136,10 @@ fn_checkRole = function(gubun){
 			varHtml += '<tr>';
 			varHtml += '<td>' + $(this).parent().clone().html() + '</td>';
 			varHtml += '<td>' + $(this).attr("roleName") + '</td>';
-			varHtml +=     '<input type="hidden" name="roleMappList'+$(this).attr("id")+'['+ index +'].rlId"  value=\"'+ $(this).attr("id") +'\"/>';
-			varHtml += '<td><input type="radio"  name="roleMappList'+$(this).attr("id")+'['+ index +'].rlDiv" value="r" checked="checked" ></input></td>';
-			varHtml += '<td><input type="radio"  name="roleMappList'+$(this).attr("id")+'['+ index +'].rlDiv" value="w"></input></td>';
-			varHtml += '<td><input type="radio"  name="roleMappList'+$(this).attr("id")+'['+ index +'].rlDiv" value="z"></input></td>';
+			varHtml +=     '<input type="hidden" name="athrMngs'+$(this).attr("id")+'['+ index +'].athrId"  value=\"'+ $(this).attr("id") +'\"/>';
+			varHtml += '<td><input type="radio"  name="athrMngs'+$(this).attr("id")+'['+ index +'].athrCl" value="r" checked="checked" ></input></td>';
+			varHtml += '<td><input type="radio"  name="athrMngs'+$(this).attr("id")+'['+ index +'].athrCl" value="w"></input></td>';
+			varHtml += '<td><input type="radio"  name="athrMngs'+$(this).attr("id")+'['+ index +'].athrCl" value="z"></input></td>';
 			varHtml += '</tr>';
 			$(this).parent().parent().remove();
 		});	
@@ -183,8 +183,8 @@ fn_saveRoleMapp = function(){
 	
 	//정보  index 재정렬
 	$("#inRole tr").each(function(index){
-		var saveName = "roleMappList["+ index +"].rlDiv"; //라디오버튼 값
-		var saveId = "roleMappList["+ index +"].rlId";   //권한아이디(hidden값)
+		var saveName = "athrMngs["+ index +"].athrCl"; //라디오버튼 값
+		var saveId = "athrMngs["+ index +"].athrId";   //권한아이디(hidden값)
 		
 		$(this).find("input[type=radio]").each(function(index){
 			$(this).attr('name',saveName);

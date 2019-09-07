@@ -41,10 +41,10 @@
 				<p class="sub_path">
 					<img src="${imagePath }/ico_home.png" width="10" height="9" />
 					<c:forEach items="${setSubTitleList}" var="list" >
-                    	&nbsp;〉&nbsp;<c:out value="${list.menuName }"></c:out>
+                    	&nbsp;〉&nbsp;<c:out value="${list.menuNm }"></c:out>
                     </c:forEach>
 				</p>
-				<form:form commandName="menuStatsVO" id="listForm" name="listForm" action="${basePath }/menuStats/r/m/selectMenuChart.do">
+				<form:form modelAttribute="menuStatsVO" id="listForm" name="listForm" action="${basePath }/menuStats/r/m/selectMenuChart.do">
 					<!--검색, 달력-->
 					<div class="selectBox">
 						<span class="search_bullet">시작/종료일자</span> 
@@ -134,7 +134,7 @@
 		axis : [ {
 			x : {
 				type : "block",
-				domain : "menuName",
+				domain : "menuNm",
 				textRotate : -20
 			},
 			y : {
@@ -161,7 +161,7 @@
 		}, {
 			type : "tooltip",
 			format : function(data) {
-				return data.menuName + " : " + data.rowSpan1;
+				return data.menuNm + " : " + data.rowSpan1;
 			}
 		} ],style : {
 	        gridTickBorderSize : 7,

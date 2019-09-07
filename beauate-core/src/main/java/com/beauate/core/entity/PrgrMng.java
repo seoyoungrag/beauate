@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import com.beauate.core.common.CommDefaultVO;
 
@@ -63,6 +64,10 @@ public class PrgrMng extends CommDefaultVO implements Serializable {
 	@OneToMany(mappedBy="prgrMng")
 	private List<MenuMng> menuMngs;
 
+	/** 프로그램 메뉴 맵핑시 구분 값 (Y일때 프로그램 맵핑)  */
+	@Transient
+	private String pgmGubun;
+	
 	public PrgrMng() {
 	}
 
@@ -158,6 +163,14 @@ public class PrgrMng extends CommDefaultVO implements Serializable {
 		menuMng.setPrgrMng(null);
 
 		return menuMng;
+	}
+
+	public String getPgmGubun() {
+		return pgmGubun;
+	}
+
+	public void setPgmGubun(String pgmGubun) {
+		this.pgmGubun = pgmGubun;
 	}
 
 }

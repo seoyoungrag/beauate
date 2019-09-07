@@ -1,6 +1,7 @@
 package com.beauate.core.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -52,8 +53,10 @@ public interface MenuMngRepository extends JpaRepository<MenuMng,Integer>{
 			  		" use_yn," + 
 			  		" reg_id," + 
 			  		" reg_de," + 
-			  		" updt_id," + 
+			  		" (select count(1) from menu_mng x where  cte.menu_id=x.upper_menu_id) as updt_id, " + 
 			  		" updt_de from cte ", 
 			  nativeQuery = true)
 	List<MenuMng> selectMenuList();
+
+	List<MenuMng> findAllByUpperMenuId(int menuId);
 }

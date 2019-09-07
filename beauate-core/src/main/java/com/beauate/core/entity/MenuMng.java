@@ -1,12 +1,27 @@
 package com.beauate.core.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
-
-import com.beauate.core.common.CommDefaultVO;
-
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+
+import com.beauate.core.common.CommDefaultVO;
 
 
 /**
@@ -83,6 +98,9 @@ public class MenuMng extends CommDefaultVO implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="PRGR_ID")
 	private PrgrMng prgrMng;
+	
+	@Transient
+	private int preMenuSort;
 
 	public MenuMng() {
 	}
@@ -228,5 +246,14 @@ public class MenuMng extends CommDefaultVO implements Serializable {
 	public void setPrgrMng(PrgrMng prgrMng) {
 		this.prgrMng = prgrMng;
 	}
+
+	public int getPreMenuSort() {
+		return preMenuSort;
+	}
+
+	public void setPreMenuSort(int preMenuSort) {
+		this.preMenuSort = preMenuSort;
+	}
+
 
 }

@@ -55,13 +55,13 @@
 				 					</c:forEach>
 			 					</c:if>
 			 					<c:choose>
-			 						<c:when test="${status.last}">
-		 								<li id="${result.menuId}" level="${result.menuLv}" menuLvl="${result.menuLv}" pgmId="${result.prgrMng.prgrId }" menuDiv="${result.menuSe }" uprMenuId ="${result.upperMenuId }" menuLup ="${result.menuSort }">
+			 						<c:when test="${result.updtId == 0}">
+		 								<li id="${result.menuId}" level="${result.menuLv}" menuLv="${result.menuLv}" pgmId="${result.prgrMng.prgrId }" menuSe="${result.menuSe }" upperMenuId ="${result.upperMenuId }" menuSort ="${result.menuSort }">
 		 									<a href="#"><c:out value="${result.menuNm}"></c:out></a>
 			 							</li> 
 			 						</c:when>
 			 						<c:otherwise>
-	 									<li id="${result.menuId}" level="${result.menuLv}" menuLvl="${result.menuLv}" pgmId="${result.prgrMng.prgrId }" menuDiv="${result.menuSe }" uprMenuId ="${result.upperMenuId }" menuLup ="${result.menuSort }">
+	 									<li id="${result.menuId}" level="${result.menuLv}" menuLv="${result.menuLv}" pgmId="${result.prgrMng.prgrId }" menuSe="${result.menuSe }" upperMenuId ="${result.upperMenuId }" menuSort ="${result.menuSort }">
 	 										<a href="#"><c:out value="${result.menuNm}"></c:out></a>
 			 							<ul>
 			 						</c:otherwise>
@@ -81,7 +81,7 @@
 	                    	<form:hidden path="menuId" />
 	                    	<form:hidden path="menuSe" />
 	                    	<form:hidden path="menuLv" />
-	                    	<form:hidden path="upperMenuId" />
+	                    	<form:hidden path="upperMenuId"/>
 	                    	<form:hidden path="prgrMng.prgrId" />
 	                    	<form:hidden path="menuSort" />
                 		</form:form>	
@@ -130,7 +130,7 @@ fn_insertMenu = function(){
 		return;
 	};
 	
-	var uprlevel = $("#treeForm #level").val();
+	var uprlevel = $("#treeForm #menuLv").val();
 	
 	//3dept 까지만 메뉴가 가능함 (level 값으로는 ROOT를 포함 하니 레벨 4까지만 가능 )
 	if(uprlevel > 3){
@@ -140,7 +140,7 @@ fn_insertMenu = function(){
 	
 	//alert(Number(uprlevel)+Number(1));
 	
-	$("#treeForm #menuLvl").val(Number(uprlevel)+Number(1));
+	$("#treeForm #menuLv").val(Number(uprlevel)+Number(1));
 	var url = "${basePath}/menu/z/n/insertMenu.do";
 	
 	$.ajax(
@@ -163,7 +163,7 @@ fn_deleteMenu = function(){
 		return;
 	};
 	
-	var menuLevel = $("#treeForm #level").val();
+	var menuLevel = $("#treeForm #menuLv").val();
 	
 	//1레벨의 ROOT 일반과 관리자는 지워지지 않는다 
 	if(menuLevel == 1){
@@ -172,15 +172,15 @@ fn_deleteMenu = function(){
 	};
 	
 	var menuId = $('#treeForm #menuId').val();
-	var uprMenuId = $("#detailForm #uprMenuId").val();
+	var upperMenuId = $("#detailForm #upperMenuId").val();
 	
 	if($("#menuTree #"+menuId).attr("aria-expanded") != undefined){
 		alert("하위 메뉴가 있는 경우 삭제가 불가능합니다.");
 		return;
 	}
 	
-	//로드 후에 uprMenuId 값은 하위 메뉴 추가 땜에 현재 레벨 값이 있어서 상세값에서 가져와서 다시 세팅해야함
-	$('#treeForm').attr("uprMenuId",uprMenuId);	
+	//로드 후에 upperMenuId 값은 하위 메뉴 추가 땜에 현재 레벨 값이 있어서 상세값에서 가져와서 다시 세팅해야함
+	$('#treeForm').attr("upperMenuId",upperMenuId);	
 	
 	var url = "${basePath}/menu/z/n/deleteMenuProc.do";		
 	
@@ -199,7 +199,7 @@ fn_loadContentsVal = function(val){
 
 //권한설정 팝업 데이터
 fn_RoleListPopOpen = function(){
-	var menuDiv = $("#detailForm #menuDiv").val();
+	var menuSe = $("#detailForm #menuSe").val();
 	var menuId = $("#detailForm #menuId").val();
 	var onLevel = $("#detailForm #menuId").val();
 	
@@ -209,7 +209,7 @@ fn_RoleListPopOpen = function(){
 		url: url,    
 		type: 'POST',
 		dataType : 'html',
-		data : {menuDiv : menuDiv, menuId : menuId},
+		data : {menuSe : menuSe, menuId : menuId},
 		error: function(){
 			alert("현재 조회 서비스가 원할하지 않습니다.\n잠시후 다시 이용해 주십시요.");
 		},
@@ -274,7 +274,7 @@ $(document).ready(function(){
 	var onMenuId = "${menuVO.menuId}"; 
 	var onLevel = "${menuVO.menuLv}";
 	// 상세 화면 로딩
-	fn_loadContents(onMenuId, onLevel);
+	//fn_loadContents(onMenuId, onLevel);
 });
 
 //좌측 메뉴 트리 (document ready 보다 무조건 뒤에 트리의 click 이벤트가 먹지 않음)
@@ -286,17 +286,18 @@ $(function () {
 		data.instance.open_node([ onMenuId ]);	// 메뉴 수정 시 열려 있던 메뉴 노드 열기
 		data.instance.select_node([ onMenuId ]); // 메뉴 수정 시 열려 있던 메뉴 노드 선택
 	}).on("select_node.jstree", function (e, data) {
+		console.log(data.node.li_attr);
 		$("#treeForm #menuId").val(data.node.li_attr.id);
-		$("#treeForm #uprMenuId").val(data.node.li_attr.uprmenuid); //(하위 메뉴 추가시 현재 메뉴를 상위 메뉴로 체크하기 위한 값세팅)
-		$("#treeForm #level").val(data.node.li_attr.level);
-		$("#treeForm #menuLup").val(data.node.li_attr.menulup);
-		$("#treeForm #menuDiv").val(data.node.li_attr.menudiv);
+		$("#treeForm #upperMenuId").val(data.node.li_attr.uppermenuid); //(하위 메뉴 추가시 현재 메뉴를 상위 메뉴로 체크하기 위한 값세팅)
+		$("#treeForm #menuLv").val(data.node.li_attr.menulv);
+		$("#treeForm #menuSort").val(data.node.li_attr.menusort);
+		$("#treeForm #menuSe").val(data.node.li_attr.menuse);
 		
 		var menuId = data.node.li_attr.id;
-		var level = data.node.li_attr.level;
+		var menuLv = data.node.li_attr.menuLv;
 		
 		// 상세 화면 로딩
-		fn_loadContents(menuId, level);
+		fn_loadContents(menuId, menuLv);
 	}).init("loaded.jstree", function (e, data) {
 		$("#menuTree").show();
 	});

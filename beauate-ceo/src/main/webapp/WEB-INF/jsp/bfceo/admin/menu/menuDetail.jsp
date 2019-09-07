@@ -4,11 +4,11 @@
 <!--메뉴체계도-->
 <div class="menuBigTable">
 	<p class="detailTitle">메뉴정보</p>
-	<form:form commandName="menuVO" id="detailForm" name="detailForm" method="post" >
+	<form:form modelAttribute="menuVO" id="detailForm" name="detailForm" method="post" >
 		<form:hidden path="menuId"/>
-		<form:hidden path="uprMenuId"/>
-		<form:hidden path="menuLvl" /> 
-		<form:hidden path="menuLup" />   
+		<form:hidden path="upperMenuId"/>
+		<form:hidden path="menuLv" /> 
+		<form:hidden path="menuSort" />   
 		<table class="menu_table">
 			<caption></caption>
 			<colgroup>
@@ -23,15 +23,15 @@
 						<tr>
 							<th class="bullet_orange">메뉴명</th>
 							<td>
-								<c:out value="${menuVO.menuName}"/>
+								<c:out value="${menuVO.menuNm}"/>
 							</td>
 							<th>메뉴구분</th>
 							<td>
-			              		<c:if test="${empty menuVO.uprMenuId}">ROOT</c:if>
-			              		<c:if test="${!empty menuVO.uprMenuId && menuVO.menuDiv eq '1'}">일반</c:if>
-			              		<c:if test="${!empty menuVO.uprMenuId && menuVO.menuDiv eq '2'}">관리자</c:if>
+			              		<c:if test="${empty menuVO.upperMenuId}">ROOT</c:if>
+			              		<c:if test="${!empty menuVO.upperMenuId && menuVO.menuSe eq '1'}">일반</c:if>
+			              		<c:if test="${!empty menuVO.upperMenuId && menuVO.menuSe eq '2'}">관리자</c:if>
 			              	</td>
-			              	<form:hidden path="menuDiv"/>
+			              	<form:hidden path="menuSe"/>
 						</tr>
 						<tr>
 							<th>사용유무</th>
@@ -40,37 +40,22 @@
 			                   	<c:if test="${menuVO.useYn eq 'N' }">미사용</c:if>
 							</td>
 							<th>정렬순서</th>
-							<td><c:out value="${menuVO.menuLup}"/></td>
+							<td><c:out value="${menuVO.menuSort}"/></td>
 						</tr>
 						<tr>
 							<th>메뉴설명</th>
 							<td colspan="4">
 								<div class="commonSearch_wrap">
 									<label class="blind" for=""></label>
-									<c:out value="${menuVO.menuDes }"/>
+									<c:out value="${menuVO.menuCn }"/>
 								</div>
 							</td>
 						</tr>
 						<tr>
-							<th>타겟영역</th>
-							<td colspan="4">
-								<c:if test="${menuVO.pupYn eq 'N' }">메인영역(콘텐츠)</c:if>
-			                  	<c:if test="${menuVO.pupYn eq 'Y' }">창(팝업)</c:if>
-							</td>
-						</tr>
-						<c:if test="${menuVO.pupYn eq 'Y' }">
-				           	<tr>
-				          		<th scope="row">팝업가로</th>
-				               	<td ><c:out value="${menuVO.pupWidth }"/>px</td>
-				               	<th scope="row">팝업세로</th>
-				               	<td ><c:out value="${menuVO.pupHeight }"/>px</td>
-				           	</tr>
-			          	</c:if>
-						<tr>
 							<th rowspan="2">대상연결</th>
 							<td colspan="4">
-								<c:if test="${!empty menuVO.pgmId }"><c:out value="${menuVO.pgmName }"></c:out>(프로그램)</c:if>
-								<c:if test="${!empty menuVO.otUrl }"><c:out value="${menuVO.otUrl }"></c:out>(URL)</c:if>
+								<c:if test="${!empty menuVO.prgrMng.prgrId }"><c:out value="${menuVO.prgrMng.prgrNm }"></c:out>(프로그램)</c:if>
+								<c:if test="${!empty menuVO.extrlUrl }"><c:out value="${menuVO.extrlUrl }"></c:out>(URL)</c:if>
 							</td>
 						</tr>
 					</c:when>
@@ -81,7 +66,7 @@
 			</tbody>
 		</table>
 		<br />
-		<c:if test="${!empty menuVO.uprMenuId}">
+		<c:if test="${!empty menuVO.upperMenuId}">
 			<p class="detailTitle">권한정보</p>
 			<span class="fr"><a href="#" onclick="javascript:fn_PgmRoleListPop('R');"><button type="button" class="grayBtn S">권한설정</button></a></span>        
 			<table class="tableList2">
@@ -102,15 +87,15 @@
 				</thead>
 				<tbody>
 				<c:choose>
-					<c:when test="${fn:length(menuVO.roleMappList) > 0 }">
-						<c:forEach items="${menuVO.roleMappList }" var="list" varStatus="status">
+					<c:when test="${fn:length(menuVO.athrMngs) > 0 }">
+						<c:forEach items="${menuVO.athrMngs }" var="list" varStatus="status">
 						<spring:nestedPath path="roleMappList[${status.index}]">
 							<tr class="row">
-								<td><c:out value="${list.rlCd }" /></td>
-	                    		<td><c:out value="${list.rlName }" /></td>
-	                    		<td><c:if test="${list.rlDiv eq 'r' }">O</c:if>&nbsp;</td>
-	                    		<td><c:if test="${list.rlDiv eq 'w' }">O</c:if>&nbsp;</td>
-	                    		<td><c:if test="${list.rlDiv eq 'z' }">O</c:if>&nbsp;</td>
+								<td><c:out value="${list.athrCd }" /></td>
+	                    		<td><c:out value="${list.athrNm }" /></td>
+	                    		<td><c:if test="${list.athrCl eq 'r' }">O</c:if>&nbsp;</td>
+	                    		<td><c:if test="${list.athrCl eq 'w' }">O</c:if>&nbsp;</td>
+	                    		<td><c:if test="${list.athrCl eq 'z' }">O</c:if>&nbsp;</td>
 	            			</tr>
             			</spring:nestedPath>
            				</c:forEach>
@@ -125,7 +110,7 @@
 	</form:form>
 </div>
 <div class="T_btnLayer fr">
-	<c:if test="${!empty menuVO.uprMenuId}">
+	<c:if test="${!empty menuVO.upperMenuId}">
 		<a href="javascript:void(0);" onclick="javascript:fn_updateMenu();"><button type="button" class="blueBtn L">수정</button></a>
 	</c:if>
 	<!--a href="#"><button type="button" class="blueBtn L">취소</button></a-->
@@ -138,10 +123,10 @@ fn_updateMenu = function(){
 		return;
 	}
 	
-	var menuLvl = $("#detailForm #menuLvl").val();
+	var menuLv = $("#detailForm #menuLv").val();
 	
 	//1레벨의 ROOT 일반과 관리자는 지워지지 않는다 
-	if(menuLvl == 1){
+	if(menuLv == 1){
 		alert("ROOT 메뉴는 수정할수 없습니다");
 		return;
 	}
