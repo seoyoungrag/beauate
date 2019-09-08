@@ -34,6 +34,26 @@ public class MenuManageServiceImpl implements MenuManageService {
 	@Autowired
 	private AthrMngRepository athrMngRepository;
     
+	private boolean isAdded(MenuMng menu, List<MenuMng> menuList) {
+    	boolean isAdded = false;
+    	for(MenuMng rtn : menuList) {
+    		if(menu.getMenuId()==rtn.getMenuId()) {
+    			isAdded = true;
+    			continue;
+    		}
+    	}
+		return isAdded;
+	}
+
+	private List<MenuMng> getChild(MenuMng parent, List<MenuMng> menuList) {
+		List<MenuMng> rtnList = new ArrayList<MenuMng>();
+    	for(MenuMng menu : menuList) {
+    		if(parent.getMenuId()==menu.getUpperMenuId()) {
+    			rtnList.add(menu);
+    		}
+    	}
+		return rtnList;
+	}
     /**
      * <pre>
      * 1. 개요 : 메뉴의 트리 리스트 
@@ -59,6 +79,39 @@ public class MenuManageServiceImpl implements MenuManageService {
     public void selectMenuList(MenuMng menuVO, ModelMap model) throws Exception{
         //메뉴 리스트
         List<MenuMng> selectList = menuMngRepository.selectMenuList();
+        List<MenuMng> rtnList = new ArrayList<MenuMng>();
+        for(MenuMng menu : selectList) {
+        	if(!isAdded(menu, rtnList)) {
+        		rtnList.add(menu);
+        		if(Integer.parseInt(menu.getUpdtId())>0) {
+        			List<MenuMng> childList1 = getChild(menu, selectList);
+        			for(MenuMng child1 : childList1) {
+        				if(!isAdded(child1, rtnList)) {
+    						rtnList.add(child1);
+        					if(Integer.parseInt(child1.getUpdtId())>0) {
+        						List<MenuMng> childList2 = getChild(child1, selectList);
+        						for(MenuMng child2 : childList2) {
+        							if(!isAdded(child2, rtnList)) {
+    	        						rtnList.add(child2);
+        	        					if(Integer.parseInt(child2.getUpdtId())>0) {
+        	        						List<MenuMng> childList3 = getChild(child2, selectList);
+        	        						for(MenuMng child3 : childList3) {
+        	        							if(!isAdded(child3, rtnList)){
+        	        								rtnList.add(child3);
+        	        							}
+        	        						}
+        	        					}else {
+        	        					}
+        							}
+        						}
+        					}else {
+        					}
+        				}
+        			}
+        		}else {
+        		}
+        	}
+        }
         //왼쪽 메뉴 클릭 시 초기 세팅값 ( 트리중에서 root를 제외한 0 )제일 상단 값 세팅)
         /*
         if("I".equals(StringUtil.nvl(menuVO.getMenuUrlGubun()).trim()) || "".equals(StringUtil.nvl(menuVO.getMenuId()).trim())){
@@ -79,7 +132,7 @@ public class MenuManageServiceImpl implements MenuManageService {
     		}
         }
             */
-		model.addAttribute("menuList", selectList);
+		model.addAttribute("menuList", rtnList);
     }
     
     /**
