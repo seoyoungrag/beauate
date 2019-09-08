@@ -124,7 +124,7 @@ public class MenuManageController {
 
         log.debug("insertMenu model:" + model);
         // 현재 클릭된 메뉴가 새로 생성된 메뉴의 상위 메뉴가 됨
-        //menuVO.setUprMenuId(menuVO.getMenuId());
+        menuVO.setUpperMenuId(menuVO.getMenuId());
         // 같은 레벨의 리스트 갯수 ==> 갯수 + 1 하는게 기본 정렬 리스트 세팅값 즉 1라면 셀렉트박스가 1, 2 이고 2에 세팅
         Integer uprMenuCnt = menuService.selectUprMenuCnt(menuVO);
         model.addAttribute("uprMenuCnt", uprMenuCnt);

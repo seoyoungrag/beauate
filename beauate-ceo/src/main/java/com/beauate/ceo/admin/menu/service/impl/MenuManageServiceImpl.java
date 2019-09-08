@@ -59,7 +59,6 @@ public class MenuManageServiceImpl implements MenuManageService {
     public void selectMenuList(MenuMng menuVO, ModelMap model) throws Exception{
         //메뉴 리스트
         List<MenuMng> selectList = menuMngRepository.selectMenuList();
-        
         //왼쪽 메뉴 클릭 시 초기 세팅값 ( 트리중에서 root를 제외한 0 )제일 상단 값 세팅)
         /*
         if("I".equals(StringUtil.nvl(menuVO.getMenuUrlGubun()).trim()) || "".equals(StringUtil.nvl(menuVO.getMenuId()).trim())){

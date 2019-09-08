@@ -101,6 +101,9 @@ public class MenuMng extends CommDefaultVO implements Serializable {
 	
 	@Transient
 	private int preMenuSort;
+	
+//	@Transient
+//	private int isLeaf;
 
 	public MenuMng() {
 	}
