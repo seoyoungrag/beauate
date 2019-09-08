@@ -23,7 +23,9 @@
 	<div class="container">
 
 		<!-- 좌측메뉴리스트 left_menu -->
-		<%@ include file="/WEB-INF/jsp/bfceo/common/leftMenu.jsp" %>
+		<div class="sub_leftMenu">
+			<%@ include file="/WEB-INF/jsp/bfceo/common/leftMenu.jsp" %>
+		</div>
 		
 		<!-- 본문 시작 -->
 		<div class="contents">

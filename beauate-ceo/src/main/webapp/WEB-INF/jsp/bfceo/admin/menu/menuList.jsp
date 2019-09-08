@@ -32,7 +32,9 @@
 	<div class="wrap">
 		<div class="container">
 			<!-- 좌측메뉴리스트 left_menu// -->
-			<%@ include file="/WEB-INF/jsp/bfceo/common/leftMenu.jsp" %>
+			<div class="sub_leftMenu">
+				<%@ include file="/WEB-INF/jsp/bfceo/common/leftMenu.jsp" %>
+			</div>
 			 <!-- //좌측메뉴리스트  left_menu -->
 			
 			<div class="contents">
@@ -131,6 +133,7 @@ fn_insertMenu = function(){
 	};
 	
 	var uprlevel = $("#treeForm #menuLv").val();
+	alert("sin >> "+$("#treeForm #menuId").val());
 	
 	//3dept 까지만 메뉴가 가능함 (level 값으로는 ROOT를 포함 하니 레벨 4까지만 가능 )
 	if(uprlevel > 3){
