@@ -2,6 +2,7 @@ package com.beauate.ceo.admin.role.service;
 
 import org.springframework.ui.ModelMap;
 
+import com.beauate.ceo.login.service.LoginVO;
 import com.beauate.core.entity.AthrMng;
 
 public interface RoleManageService {
@@ -116,6 +117,8 @@ public interface RoleManageService {
 	 */
 	public int insertRoleGroup(AthrMng roleVO) throws Exception;
 // 권한 그룹 관리 End
+
+	public int selectPortalManageRoleCnt(LoginVO resultVO);
 	
 	
 }

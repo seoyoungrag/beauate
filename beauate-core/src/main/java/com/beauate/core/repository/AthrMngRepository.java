@@ -21,4 +21,6 @@ public interface AthrMngRepository extends JpaRepository<AthrMng, Integer>{
 	List<AthrMng> findAllByAthrIdNot(int athrId);
 
 	AthrMng findByAthrCdIgnoreCase(String athrCd);
+
+	Long countByMenuMngsMenuSeAndBeutyUsersUserId(String string, int userId);
 }

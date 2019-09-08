@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 
 import com.beauate.ceo.admin.role.service.RoleManageService;
+import com.beauate.ceo.login.service.LoginVO;
 import com.beauate.core.entity.AthrMng;
 import com.beauate.core.repository.AthrMngRepository;
 
@@ -88,6 +89,12 @@ public class RoleManageServiceImpl implements RoleManageService {
 	@Override
 	public int insertRoleGroup(AthrMng roleVO) throws Exception {
 		return athrMngRepository.save(roleVO) != null ? 1 : 0;
+	}
+
+	@Override
+	public int selectPortalManageRoleCnt(LoginVO resultVO) {
+		Long count = athrMngRepository.countByMenuMngsMenuSeAndBeutyUsersUserId("2", resultVO.getUserId());
+		return count.intValue();
 	}
 
 }
