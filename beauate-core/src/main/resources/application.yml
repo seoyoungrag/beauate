@@ -11,7 +11,7 @@ spring:
   profiles: local
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.0.2:3306/beauate_db?useSSL=false&serverTimezone=Asia/Seoul
+    url: jdbc:mysql://14.63.106.109:63306/beauate_db?useSSL=false&serverTimezone=Asia/Seoul
     username: beauate_admin
     password: sjdznf
     initialization-mode: always
